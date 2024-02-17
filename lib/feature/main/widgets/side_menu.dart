@@ -375,7 +375,57 @@ class SideMenu extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 24)
+          Container(
+            margin: const EdgeInsets.fromLTRB(8, 4, 10, 8),
+            decoration: BoxDecoration(
+              color: controller.tabIndex == 12
+                ? AppColors.primary
+                : Colors.transparent,
+              borderRadius: BorderRadius.circular(8)
+            ),
+            child: DrawerListTile(
+              title: "PointOfSales",
+              icon: const SizedBox(
+                height: 32,
+                width: 32,
+                child: Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.cashRegister,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
+              press: () {
+                controller.changeTabIndex(12);
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(8, 4, 12, 8),
+            decoration: BoxDecoration(
+              color: controller.tabIndex == 13
+                ? AppColors.primary
+                : Colors.transparent,
+              borderRadius: BorderRadius.circular(8)
+            ),
+            child: DrawerListTile(
+              title: "History",
+              icon: const SizedBox(
+                height: 32,
+                width: 32,
+                child: Center(
+                  child: Icon(
+                    IconlyBold.activity,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
+              press: () {
+                controller.changeTabIndex(13);
+              },
+            ),
+          ),
+          const SizedBox(height: 24),
         ],
       ),
     );

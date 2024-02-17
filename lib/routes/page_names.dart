@@ -17,4 +17,6 @@ class PageName {
   static const DASHBOARD_TRANSACTION = "/dashboard-transaction";
   static const DASHBOARD_FINANCIAL = "/dashboard-financial";
   static const DASHBOARD_FORECASTING = "/dashboard-forecasting";
+  static const POINTOFSALES = "/point-of-sales";
+  static const HISTORY = "/history";
 }

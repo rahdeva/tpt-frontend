@@ -6,7 +6,11 @@ import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting
 import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting_page.dart';
 import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_binding.dart';
 import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_page.dart';
+import 'package:tpt_frontend/feature/history/history_binding.dart';
+import 'package:tpt_frontend/feature/history/history_page.dart';
 import 'package:tpt_frontend/feature/home/home_binding.dart';
+import 'package:tpt_frontend/feature/point_of_sales/pos_binding.dart';
+import 'package:tpt_frontend/feature/point_of_sales/pos_page.dart';
 import 'package:tpt_frontend/feature/product/product_binding.dart';
 import 'package:tpt_frontend/feature/product/product_page.dart';
 import 'package:tpt_frontend/feature/report_financial/report_financial_binding.dart';
@@ -47,6 +51,8 @@ class PageRoutes {
     TransactionDashboardBinding(),
     FinancialDashboardBinding(),
     ForecastingDashboardBinding(),
+    PointOfSalesBinding(),
+    HistoryBinding(),
   ];
 
   static final pages = [
@@ -128,6 +134,16 @@ class PageRoutes {
       name: PageName.DASHBOARD_FORECASTING,
       page: () => const ForecastingDashboardPage(),
       binding: ForecastingDashboardBinding()
+    ),
+    GetPage(
+      name: PageName.POINTOFSALES,
+      page: () => const PointOfSalesPage(),
+      binding: PointOfSalesBinding()
+    ),
+    GetPage(
+      name: PageName.HISTORY,
+      page: () => const HistoryPage(),
+      binding: HistoryBinding()
     ),
   ];
 }
