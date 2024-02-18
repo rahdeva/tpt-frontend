@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                               Column(
                                 children: [
                                   GradientTextWidget(
-                                    'Back Office',
+                                    'Toko Perlengkapan Ternak',
                                     style: Theme.of(context).textTheme.displayMedium!.copyWith(
                                       fontSize: 40,
                                       // color: AppColors.primary,

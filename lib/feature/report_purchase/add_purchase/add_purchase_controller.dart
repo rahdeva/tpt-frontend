@@ -47,7 +47,7 @@ class AddPurchaseReportController extends GetxController {
   List<int> purchaseProductIdDataList = [];
   List<int> purchasePriceDataList = [];
   List<int> totalItemDataList = [];
-  List<int> subTotalDataList = [];
+  RxList<int> subTotalDataList = <int>[].obs;
   List<GlobalKey<FormBuilderState>> purchasingFormKeys = [];
   Rx<int> purchasingIndex = Rx(0);
 
@@ -205,22 +205,21 @@ class AddPurchaseReportController extends GetxController {
                       flex: 1,
                       child: TextFieldWidget(
                         initialValue: totalItemDataList[idx].toString(),
-                        name: 'total-${idx + 1}', 
+                        name: 'total-$idx', 
                         keyboardType: const TextInputType.numberWithOptions(
                           decimal: false,
                           signed: true,
                         ),
                         onChanged: (value){
-                          print(idx);
                           totalItemDataList[idx]
                             = int.parse(purchasingFormKeys[idx]
                               .currentState!
-                              .fields['total-${idx + 1}']!
+                              .fields['total-$idx']!
                               .value
                             );
                           subTotalDataList[idx] 
                             = totalItemDataList[idx] * choosenProduct.purchasePrice!;
-                          update(["total-${idx + 1}"]);
+                          // update(["total-$idx"]);
                           update();
                           updateTotalPrice();
                         },
@@ -249,11 +248,11 @@ class AddPurchaseReportController extends GetxController {
                                 size: 18.0,
                               ),
                               onTap: () {
-                                totalItemDataList[idx] = totalItemDataList[idx]+ 1;
+                                totalItemDataList[idx] = totalItemDataList[idx] + 1;
                                 purchasingFormKeys[idx]
                                   .currentState!
                                   .patchValue({
-                                    "total-${idx + 1}": totalItemDataList[idx].toString(),
+                                    "total-$idx": totalItemDataList[idx].toString(),
                                   }
                                 );
                                 subTotalDataList[idx] 
@@ -274,7 +273,7 @@ class AddPurchaseReportController extends GetxController {
                                 purchasingFormKeys[idx]
                                   .currentState!
                                   .patchValue({
-                                    "total-${idx + 1}": totalItemDataList[idx].toString(),
+                                    "total-$idx": totalItemDataList[idx].toString(),
                                   }
                                 );
                                 subTotalDataList[idx] = 
@@ -293,25 +292,49 @@ class AddPurchaseReportController extends GetxController {
             ),
           ),
           DataCell(
-            GetBuilder(
-              id: "total-${idx + 1}",
-              init: AddPurchaseReportController(),
-              builder: (_) {
-                return Text(
-                  NumberFormat.currency(
-                    locale: 'id', 
-                    decimalDigits: 0,
-                    symbol: "Rp "
-                  ).format(subTotalDataList[idx]),
-                  maxLines: 1,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.black,
-                  ),
-                );
-              }
+            // GetBuilder(
+            //   id: "total-$idx",
+            //   init: AddPurchaseReportController(),
+            //   builder: (_) {
+            //     return Text(
+            //       NumberFormat.currency(
+            //         locale: 'id', 
+            //         decimalDigits: 0,
+            //         symbol: "Rp "
+            //       ).format(subTotalDataList[idx]),
+            //       maxLines: 1,
+            //       style: const TextStyle(
+            //         fontSize: 12,
+            //         fontWeight: FontWeight.w500,
+            //         color: AppColors.black,
+            //       ),
+            //     );
+            //   }
+            // )
+            Text(
+              "0",
+              maxLines: 1,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: AppColors.black,
+              ),
             )
+            // Obx(
+            //   () => Text(
+            //     NumberFormat.currency(
+            //       locale: 'id', 
+            //       decimalDigits: 0,
+            //       symbol: "Rp "
+            //     ).format(subTotalDataList[idx]),
+            //     maxLines: 1,
+            //     style: const TextStyle(
+            //       fontSize: 12,
+            //       fontWeight: FontWeight.w500,
+            //       color: AppColors.black,
+            //     ),
+            //   )
+            // )
           ),
           DataCell(
             Container(
@@ -358,15 +381,31 @@ class AddPurchaseReportController extends GetxController {
     update();
   }
 
+  // void updateSubTotal(){
+  //   for (int i = 0; i < subTotalDataList.length; i++) {
+  //     update(["total-$i"]);
+  //   }
+  // }
+
   void deletePurchasingItem(int index){
     purchaseProductIdDataList.removeAt(index);
+    print("purchaseProductIdDataList");
+    print(purchaseProductIdDataList);
     purchasePriceDataList.removeAt(index);
+    print("purchasePriceDataList");
+    print(purchasePriceDataList);
     totalItemDataList.removeAt(index);
+    print("totalItemDataList");
+    print(totalItemDataList);
     subTotalDataList.removeAt(index);
+    print("subTotalDataList");
+    print(subTotalDataList);
     purchasingFormKeys.removeAt(index);
-    purchasingDataList.removeAt(index - 1);
-    update();
+    purchasingDataList.removeAt(index);
+    // updateSubTotal();
     update(["purchase-table"]);
+    updateTotalPrice();
+    update();
   }
 
   // [CREATE] Add New Purchase
