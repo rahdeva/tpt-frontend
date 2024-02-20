@@ -255,7 +255,7 @@ class FinancialReportController extends GetxController {
             symbol: "Rp "
           ).format(dataObject.balance),
         });
-        editfinancialTypeResult = getFinancialTypeByTypeId(dataObject.type!);
+        editfinancialTypeResult = getFinancialTypeByTypeId(dataObject.financialTypeId!);
         update(['edit-financial-type-dropdown']);
       } else{
         deleteFinancialReportFormKey.currentState!.patchValue({
@@ -277,7 +277,7 @@ class FinancialReportController extends GetxController {
             symbol: "Rp "
           ).format(dataObject.balance),
         });
-        deletefinancialTypeResult = getFinancialTypeByTypeId(dataObject.type!);
+        deletefinancialTypeResult = getFinancialTypeByTypeId(dataObject.financialTypeId!);
         update(['delete-financial-type-dropdown']);
       }
       update();

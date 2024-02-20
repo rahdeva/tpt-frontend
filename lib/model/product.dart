@@ -83,6 +83,7 @@ class Product {
     String? productName;
     int? purchasePrice;
     String? productCode;
+    int? eceranId;
     String? brand;
     int? salePrice;
     int? stock;
@@ -98,6 +99,7 @@ class Product {
         this.productName,
         this.purchasePrice,
         this.productCode,
+        this.eceranId,
         this.brand,
         this.salePrice,
         this.stock,
@@ -114,6 +116,7 @@ class Product {
         productName: json["product_name"],
         purchasePrice: json["purchase_price"],
         productCode: json["product_code"],
+        eceranId: json["eceran_id"],
         brand: json["brand"],
         salePrice: json["sale_price"],
         stock: json["stock"],
@@ -130,6 +133,7 @@ class Product {
         "product_name": productName,
         "purchase_price": purchasePrice,
         "product_code": productCode,
+        "eceran_id": eceranId,
         "brand": brand,
         "sale_price": salePrice,
         "stock": stock,

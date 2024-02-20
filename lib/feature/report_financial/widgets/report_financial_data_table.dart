@@ -1,6 +1,7 @@
 import 'package:tpt_frontend/feature/report_financial/report_financial_controller.dart';
 import 'package:tpt_frontend/feature/report_financial/widgets/delete_report_financial.dart';
-import 'package:tpt_frontend/feature/report_financial/widgets/edit_report_financial.dart';
+// import 'package:tpt_frontend/feature/report_financial/widgets/delete_report_financial.dart';
+// import 'package:tpt_frontend/feature/report_financial/widgets/edit_report_financial.dart';
 import 'package:tpt_frontend/model/financial.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -49,7 +50,7 @@ class FinancialReportDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            controller.getFinancialTypeNamebyTypeId(item.type),
+            controller.getFinancialTypeNamebyTypeId(item.financialTypeId),
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),
@@ -103,16 +104,18 @@ class FinancialReportDataSource extends DataTableSource {
             margin: const EdgeInsets.all(8),
             child: Row(
               children: [
-                EditFinancialButton(
-                  financialId: item.financialId!,
-                  userId: item.userId!,
-                  controller: controller,
-                ),
-                const SizedBox(width: 12),
-                DeleteFinancialButton(
-                  financialId: item.financialId!,
-                  controller: controller
-                )
+                // EditFinancialButton(
+                //   financialId: item.financialId!,
+                //   userId: item.userId!,
+                //   controller: controller,
+                // ),
+                // const SizedBox(width: 12),
+                (index == 0)
+                ? DeleteFinancialButton(
+                    financialId: item.financialId!,
+                    controller: controller
+                  )
+                : const SizedBox(),
               ],
             ),
           ),

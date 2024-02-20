@@ -52,7 +52,7 @@ class Financial {
     int? financialId;
     int? userId;
     String? userName;
-    int? type;
+    int? financialTypeId;
     DateTime? financialDate;
     String? information;
     int? cashIn;
@@ -65,7 +65,7 @@ class Financial {
         this.financialId,
         this.userId,
         this.userName,
-        this.type,
+        this.financialTypeId,
         this.financialDate,
         this.information,
         this.cashIn,
@@ -79,7 +79,7 @@ class Financial {
         financialId: json["financial_id"],
         userId: json["user_id"],
         userName: json["user_name"],
-        type: json["type"],
+        financialTypeId: json["financial_type_id"],
         financialDate: json["financial_date"] == null ? null : DateTime.parse(json["financial_date"]),
         information: json["information"],
         cashIn: json["cash_in"],
@@ -93,7 +93,7 @@ class Financial {
         "financial_id": financialId,
         "user_id": userId,
         "user_name": userName,
-        "type": type,
+        "financial_type_id": financialTypeId,
         "financial_date": financialDate?.toIso8601String(),
         "information": information,
         "cash_in": cashIn,
