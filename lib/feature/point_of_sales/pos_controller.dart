@@ -259,7 +259,7 @@ class PointOfSalesController extends GetxController {
   }) async {
     showLoading();
     final dio = await AppDio().getBasicDIO();
-    DateTime saleDateUTC8 = saleDate.toUtc().add(const Duration(hours: 8));
+    DateTime saleDateUTC8 = saleDate.toUtc().add(const Duration(hours: 0));
     String saleDateValue = saleDateUTC8.toIso8601String();
 
     salesDetail.clear();

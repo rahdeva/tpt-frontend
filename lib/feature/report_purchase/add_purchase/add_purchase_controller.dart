@@ -415,7 +415,7 @@ class AddPurchaseReportController extends GetxController {
   }) async {
     showLoading();
     final dio = await AppDio().getBasicDIO();
-    DateTime purchaseDateUTC8 = purchaseDate.toUtc().add(const Duration(hours: 8));
+    DateTime purchaseDateUTC8 = purchaseDate.toUtc().add(const Duration(hours: 0));
     String purchaseDateValue = purchaseDateUTC8.toIso8601String();
 
     purchasesDetail.clear();
