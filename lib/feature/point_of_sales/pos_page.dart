@@ -72,7 +72,9 @@ class PointOfSalesPage extends StatelessWidget {
                                           child: (controller.isLoading)
                                           ? const Center(child: CircularProgressIndicator())
                                           : (controller.productDataList.isEmpty)
-                                            ? const EmptyStateWidget()
+                                            ? const EmptyStateWidget(
+                                                textColor: AppColors.white,
+                                              )
                                             : POSProductBuilder(
                                               controller: controller
                                             ),

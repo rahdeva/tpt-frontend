@@ -3,8 +3,15 @@ import '/resources/resources.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({
-    super.key,
+    super.key, 
+    this.title, 
+    this.textColor, 
+    this.imageWidth,
   });
+
+  final double? imageWidth;
+  final String? title;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +23,17 @@ class EmptyStateWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Image(
-                width: 180,
+                width: imageWidth ?? 180,
                 fit: BoxFit.fill,
                 image:  AppImages.imgEmpty.image().image,
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(24, 24, 24, 20),
                 child: Text(
-                  "Data not found",
+                  title ?? "Data not found",
                   style:  Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontStyle: FontStyle.normal,
-                    color: AppColors.black
+                    color: textColor ?? AppColors.black
                   ),
                   textAlign: TextAlign.center,
                 ),

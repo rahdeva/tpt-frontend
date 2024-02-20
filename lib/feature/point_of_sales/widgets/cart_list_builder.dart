@@ -15,7 +15,7 @@ class CartListBuilder extends StatelessWidget {
     return Scrollbar(
       thumbVisibility: true,
       child: ListView.separated(
-        itemCount: controller.productDataList.length,
+        itemCount: controller.cartDataList.length,
         shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),
         separatorBuilder: (context, index) {
@@ -26,7 +26,7 @@ class CartListBuilder extends StatelessWidget {
           return CartListItem(
             index: index,
             controller: controller,
-            mData: controller.productDataList[index],
+            mData: controller.cartDataList[index],
           );
         },
       ),

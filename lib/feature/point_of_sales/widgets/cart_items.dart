@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:intl/intl.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_controller.dart';
-import 'package:tpt_frontend/model/product.dart';
+import 'package:tpt_frontend/model/cart_product.dart';
 import '/resources/resources.dart';
 import 'package:sizer/sizer.dart';
 
 class CartListItem extends StatelessWidget {
   final int index;
   final PointOfSalesController controller;
-  final Product mData;
+  final CartProduct mData;
 
   const CartListItem({
     Key? key, 
@@ -46,7 +46,7 @@ class CartListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  mData.productName ?? "-",
+                  mData.productName ?? "",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -60,25 +60,82 @@ class CartListItem extends StatelessWidget {
                     locale: 'id', 
                     decimalDigits: 0,
                     symbol: "Rp "
-                  ).format(mData.salePrice),
+                  ).format(mData.subTotal!.value),
+                  // NumberFormat.currency(
+                  //   locale: 'id', 
+                  //   decimalDigits: 0,
+                  //   symbol: "Rp "
+                  // ).format(mData.salePrice),
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: AppColors.primary,
                     fontWeight: FontWeight.w700
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  mData.stock.toString(),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w500
-                  ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        controller.addQuantity(mData);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(5)
+                        ),
+                        child: const Icon(
+                          Icons.add, 
+                          size: 20,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      mData.quantity!.value.toString(),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    InkWell(
+                      onTap: (){
+                        controller.substractQuantity(mData);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(5)
+                        ),
+                        child: const Icon(
+                          Icons.remove, 
+                          size: 20,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                // const SizedBox(height: 4),
+                // Text(
+                //   "SubTotal : ${NumberFormat.currency(
+                //     locale: 'id', 
+                //     decimalDigits: 0,
+                //     symbol: "Rp "
+                //   ).format(mData.subTotal!.value)}",
+                //   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                //     color: AppColors.black,
+                //     fontWeight: FontWeight.w500
+                //   ),
+                // ),
               ],
             ),
           ),
           IconButton(
-            onPressed: (){},
+            onPressed: (){
+              controller.deleteCartItem(index);
+            },
             icon: const Icon(
               IconlyLight.delete,
               size: 16,
