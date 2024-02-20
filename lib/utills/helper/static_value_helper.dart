@@ -14,4 +14,24 @@ class StaticValueHelper{
     2005: "SIMT Error",
     2006: "Payment sudah terassign!"
   };
+
+  static Map<int, String> productCategoryList = {
+    1: "Pakan Ternak 1 sak 50 kg",
+    2: "Pakan Ternak 1 sak 30 kg",
+    3: "Pakan Ternak 1 sak 25 kg",
+    4: "Pakan Ternak 1 kg",
+    5: "Obat Ternak",
+    6: "Alat Ternak",
+    7: "Lainnya",
+  };
+
+  static Map<int, String> productCategoryTab = {
+    1: "Pakan 50 kg",
+    2: "Pakan 30 kg",
+    3: "Pakan 25 kg",
+    4: "Pakan 1 kg",
+    5: "Obat",
+    6: "Alat",
+    7: "Lainnya",
+  };
 }

@@ -80,6 +80,7 @@ class Product {
     int? productId;
     int? categoryId;
     String? categoryName;
+    String? categoryColor;
     String? productName;
     int? purchasePrice;
     String? productCode;
@@ -96,6 +97,7 @@ class Product {
         this.productId,
         this.categoryId,
         this.categoryName,
+        this.categoryColor,
         this.productName,
         this.purchasePrice,
         this.productCode,
@@ -113,6 +115,7 @@ class Product {
         productId: json["product_id"],
         categoryId: json["category_id"],
         categoryName: json["category_name"],
+        categoryColor: json["category_color"],
         productName: json["product_name"],
         purchasePrice: json["purchase_price"],
         productCode: json["product_code"],
@@ -130,6 +133,7 @@ class Product {
         "product_id": productId,
         "category_id": categoryId,
         "category_name": categoryName,
+        "category_color": categoryColor,
         "product_name": productName,
         "purchase_price": purchasePrice,
         "product_code": productCode,

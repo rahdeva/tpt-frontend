@@ -197,6 +197,15 @@ class PemasaranRoleMenus extends StatelessWidget {
       children: [
         MenuItem(
           controller: controller,
+          title: "Home",
+          tabIndex: 0,
+          icon: const Icon(
+            IconlyBold.home,
+            color: AppColors.white,
+          ),
+        ),
+        MenuItem(
+          controller: controller,
           title: "Setting",
           tabIndex: 1,
           icon: const Icon(

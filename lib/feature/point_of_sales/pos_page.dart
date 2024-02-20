@@ -1,12 +1,11 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_controller.dart';
+import 'package:tpt_frontend/feature/point_of_sales/widgets/cart_total_widget.dart';
+import 'package:tpt_frontend/feature/point_of_sales/widgets/header_pos_widget.dart';
 import 'package:tpt_frontend/feature/point_of_sales/widgets/product_list_builder.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/helper/responsive.dart';
-import 'package:tpt_frontend/utills/widget/button/primary_button.dart';
-import 'package:tpt_frontend/utills/widget/forms/text_field_widget.dart';
 import 'package:tpt_frontend/utills/widget/state/empty_state_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
@@ -22,7 +21,7 @@ class PointOfSalesPage extends StatelessWidget {
           child: Container(
             width: 100.w,
             height: 100.h,
-            margin: const EdgeInsets.fromLTRB(24, 40, 0, 0),
+            margin: const EdgeInsets.fromLTRB(24, 24, 0, 0),
             decoration: const BoxDecoration(
               color: AppColors.background2,
               borderRadius: BorderRadius.only(
@@ -46,53 +45,19 @@ class PointOfSalesPage extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        flex: 2,
+                        flex: 5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-                              height: 100.h-40,
+                              padding: const EdgeInsets.fromLTRB(32, 32, 8, 0),
+                              height: 100.h-24,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Toko Perlengkapan Ternak",
-                                    textAlign: TextAlign.left,
-                                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.w700
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    "Tuesday, 09 January 2024",
-                                    textAlign: TextAlign.left,
-                                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                      color: AppColors.grey,
-                                      fontWeight: FontWeight.w500
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  SizedBox(
-                                    width: 20.w,
-                                    child: TextFieldWidget(
-                                      name: "Search", 
-                                      hintText: "Search",
-                                      filled: true,
-                                      keyboardType: TextInputType.text,
-                                      contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 12, 
-                                        vertical: 12
-                                      ),
-                                      prefixIcon: const Icon(
-                                        Icons.search,
-                                      ),
-                                      hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        color: AppColors.colorPrimary
-                                      ),
-                                    ),
+                                  HeaderPOSWidget(
+                                    controller: controller
                                   ),
                                   const SizedBox(height: 24),
                                   Expanded(
@@ -106,20 +71,10 @@ class PointOfSalesPage extends StatelessWidget {
                                           onLoading: controller.loadNextPage,
                                           child: (controller.isLoading)
                                           ? const Center(child: CircularProgressIndicator())
-                                          : (controller.dataList.isEmpty)
+                                          : (controller.productDataList.isEmpty)
                                             ? const EmptyStateWidget()
-                                            : ScrollConfiguration(
-                                              behavior: ScrollConfiguration.of(context).copyWith(
-                                                physics: const BouncingScrollPhysics(),
-                                                dragDevices: {
-                                                  PointerDeviceKind.touch,
-                                                  PointerDeviceKind.mouse,
-                                                  PointerDeviceKind.trackpad
-                                                },
-                                              ),
-                                              child: POSProductBuilder(
-                                                  controller: controller
-                                                ),
+                                            : POSProductBuilder(
+                                              controller: controller
                                             ),
                                         ),
                                         ],
@@ -132,65 +87,9 @@ class PointOfSalesPage extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              left: BorderSide(
-                                width: 1,
-                                color: AppColors.white.withOpacity(0.2)
-                              ),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-                                height: 70.h,
-                                child: Text(
-                                  "Order",
-                                  textAlign: TextAlign.left,
-                                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w700
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 2,
-                                child: Divider(
-                                  color: AppColors.white.withOpacity(0.2),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-                                height: 30.h-42,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Total",
-                                      textAlign: TextAlign.left,
-                                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                        color: AppColors.white,
-                                        fontWeight: FontWeight.w700
-                                      ),
-                                    ),
-                                    const SizedBox(height: 32),
-                                    PrimaryButtonWidget(
-                                      margin:  const EdgeInsets.all(0),
-                                      buttonText: "Proceed", 
-                                      onPressed: () async {
-                                        
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                        flex: 2,
+                        child: CartTotalWidget(
+                          controller: controller
                         ),
                       ),
                     ],

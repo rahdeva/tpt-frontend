@@ -19,7 +19,8 @@ class PointOfSalesController extends GetxController {
   Rx<bool> hasNext = Rx(false);
   Rx<bool> loadNext = Rx(false);
 
-  List<Product> dataList = [];
+  List<Product> productDataList = [];
+  List<Product> cartDataList = [];
 
   @override
   void onInit() {
@@ -28,7 +29,7 @@ class PointOfSalesController extends GetxController {
   }
 
   void refreshPage() async {
-    dataList = [];
+    productDataList = [];
     getAllProduct();
     formKey.currentState!.reset();
     update();
@@ -46,7 +47,7 @@ class PointOfSalesController extends GetxController {
   void getAllProduct({
     String? searchKeyword,
     int page = 1,
-    int limit = 10
+    int pageSize = 12
   }) async {
     isLoading = true;
     final dio = await AppDio().getDIO();
@@ -54,15 +55,15 @@ class PointOfSalesController extends GetxController {
 
     try {
       final productData = await dio.get(
-        "${BaseUrlLocal.product}?keyword=${searchKeyword ?? ""}&limit=$limit&page=$page",
+        "${BaseUrlLocal.product}?keyword=${searchKeyword ?? ""}&pageSize=$pageSize&page=$page",
       );
       debugPrint('Products: ${productData.data}');
       productResponse = ProductResponse.fromJson(productData.data);
       if(loadNext.value == true){
-        dataList.addAll(productResponse.data!.product ?? []); 
+        productDataList.addAll(productResponse.data!.product ?? []); 
         loadNext.value = false;
       } else{
-        dataList = productResponse.data!.product ?? [];
+        productDataList = productResponse.data!.product ?? [];
       }
       hasNext.value = productResponse.data!.meta!.page! < productResponse.data!.meta!.totalPage!;
     } on DioError catch (error) {
