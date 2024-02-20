@@ -14,7 +14,10 @@ class MainPage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          drawer: SideMenu(controller: controller),
+          drawer: SideMenu(
+            controller: controller, 
+            userRoles: controller.userRoles
+          ),
           body: SafeArea(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,6 +30,7 @@ class MainPage extends StatelessWidget {
                       builder: (_) {
                         return SideMenu(
                           controller: controller,
+                          userRoles: controller.userRoles,
                         );
                       }
                     ),

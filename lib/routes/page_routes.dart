@@ -41,6 +41,8 @@ class PageRoutes {
   static final sideMenuBindings = [
     HomeBinding(),
     SettingBinding(),
+    PointOfSalesBinding(),
+    HistoryBinding(),
     ProductBinding(),
     CategoryBinding(),
     SupplierBinding(),
@@ -51,8 +53,6 @@ class PageRoutes {
     TransactionDashboardBinding(),
     FinancialDashboardBinding(),
     ForecastingDashboardBinding(),
-    PointOfSalesBinding(),
-    HistoryBinding(),
   ];
 
   static final pages = [

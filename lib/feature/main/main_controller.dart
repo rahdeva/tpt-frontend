@@ -24,12 +24,14 @@ class MainController extends GetxController {
   static MainController find = Get.find();
   final AuthController authController = AuthController.find;
   UserData? user;
+  int userRoles = 1;
   int tabIndex = 0;
   List<int> historyIndex = [];
 
   @override
-  void onInit() {
+  void onInit() async {
     user = authController.user;
+    userRoles = user!.roleId!;
     Utils.loadSideMenuBinding(tabIndex);
     update();
     super.onInit();
@@ -37,6 +39,7 @@ class MainController extends GetxController {
 
   Future<void> refreshPage() async {
     user = authController.user;
+    userRoles = user!.roleId!;
     update(['content', 'side-menu']);
     update();
   }
@@ -44,6 +47,8 @@ class MainController extends GetxController {
   List<Widget> pageView = [
     const HomePage(),
     const SettingPage(),
+    const PointOfSalesPage(),
+    const HistoryPage(),
     const ProductPage(),
     const CategoryPage(),
     const SupplierPage(),
@@ -54,8 +59,6 @@ class MainController extends GetxController {
     const TransactionDashboardPage(),
     const FinancialDashboardPage(),
     const ForecastingDashboardPage(),
-    const PointOfSalesPage(),
-    const HistoryPage(),
   ];
 
   void changeTabIndex(int index) {

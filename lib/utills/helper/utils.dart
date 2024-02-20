@@ -2,7 +2,9 @@ import 'package:tpt_frontend/feature/category/category_controller.dart';
 import 'package:tpt_frontend/feature/dashboard_financial/dashboard_financial_controller.dart';
 import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting_controller.dart';
 import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_controller.dart';
+import 'package:tpt_frontend/feature/history/history_controller.dart';
 import 'package:tpt_frontend/feature/home/home_controller.dart';
+import 'package:tpt_frontend/feature/point_of_sales/pos_controller.dart';
 import 'package:tpt_frontend/feature/product/product_controller.dart';
 import 'package:tpt_frontend/feature/report_financial/report_financial_controller.dart';
 import 'package:tpt_frontend/feature/report_purchase/report_purchase_controller.dart';
@@ -41,33 +43,39 @@ class Utils {
         Get.delete<SettingController>();
         break;
       case 2:
-        Get.delete<ProductController>();
+        Get.delete<PointOfSalesController>();
         break;
       case 3:
-        Get.delete<CategoryController>();
+        Get.delete<HistoryController>();
         break;
       case 4:
-        Get.delete<SupplierController>();
+        Get.delete<ProductController>();
         break;
       case 5:
-        Get.delete<UserController>();
+        Get.delete<CategoryController>();
         break;
       case 6:
-        Get.delete<SaleReportController>();
+        Get.delete<SupplierController>();
         break;
       case 7:
-        Get.delete<PurchaseReportController>();
+        Get.delete<UserController>();
         break;
       case 8:
-        Get.delete<FinancialReportController>();
+        Get.delete<SaleReportController>();
         break;
       case 9:
-        Get.delete<TransactionDashboardController>();
+        Get.delete<PurchaseReportController>();
         break;
       case 10:
-        Get.delete<FinancialDashboardController>();
+        Get.delete<FinancialReportController>();
         break;
       case 11:
+        Get.delete<TransactionDashboardController>();
+        break;
+      case 12:
+        Get.delete<FinancialDashboardController>();
+        break;
+      case 13:
         Get.delete<ForecastingDashboardController>();
         break;
       default:
