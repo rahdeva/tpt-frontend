@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class CartProduct {
     int? productId;
+    String? productCode;
     String? productName;
     int? eceranId;
     int? salePrice;
@@ -12,6 +13,7 @@ class CartProduct {
 
     CartProduct({
         this.productId,
+        this.productCode,
         this.productName,
         this.eceranId,
         this.salePrice,
@@ -23,6 +25,7 @@ class CartProduct {
 
     factory CartProduct.fromJson(Map<String, dynamic> json) => CartProduct(
         productId: json["product_id"],
+        productCode: json["product_code"],
         productName: json["product_name"],
         eceranId: json["eceran_id"],
         salePrice: json["sale_price"],
@@ -34,6 +37,7 @@ class CartProduct {
 
     Map<String, dynamic> toJson() => {
         "product_id": productId,
+        "product_code": productCode,
         "product_name": productName,
         "eceran_id": eceranId,
         "sale_price": salePrice,

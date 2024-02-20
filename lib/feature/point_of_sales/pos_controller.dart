@@ -2,16 +2,27 @@ import 'package:dio/dio.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tpt_frontend/data/remote/dio.dart';
 import 'package:tpt_frontend/data/remote/endpoint.dart';
+import 'package:tpt_frontend/feature/auth/auth_controller.dart';
 import 'package:tpt_frontend/model/cart_product.dart';
 import 'package:tpt_frontend/model/product.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:tpt_frontend/model/user.dart';
+import 'package:tpt_frontend/resources/resources.dart';
+import 'package:tpt_frontend/utills/helper/loading_helper.dart';
+import 'package:tpt_frontend/utills/widget/pop_up/pop_up_widget.dart';
+import 'package:tpt_frontend/utills/widget/snackbar/snackbar_widget.dart';
 
 class PointOfSalesController extends GetxController {
   static PointOfSalesController find = Get.find();
   final GlobalKey<FormBuilderState> searchformKey = GlobalKey<FormBuilderState>();
+  final GlobalKey<FormBuilderState> orderFormKey = GlobalKey<FormBuilderState>();
+  final purchasingKey = GlobalKey<PaginatedDataTableState>();
   RefreshController refreshController = RefreshController(initialRefresh: false);
+  final AuthController authController = AuthController.find;
+  UserData? get user => authController.user;
   bool isLoading = false;
 
   Rx<int> page = Rx(1);
@@ -24,6 +35,8 @@ class PointOfSalesController extends GetxController {
 
   RxList<CartProduct> cartDataList = <CartProduct>[].obs;
   Rx<int> total = Rx(0);
+  List<DataRow> cartDataRowList = [];
+  List<Map<String, dynamic>> salesDetail = [];
 
   @override
   void onInit() {
@@ -33,6 +46,8 @@ class PointOfSalesController extends GetxController {
 
   void refreshPage() async {
     productDataList = [];
+    cartDataList.clear();
+    total.value = 0;
     searchformKey.currentState?.reset();
     searchKeyword.value = "";
     await getAllProduct();
@@ -78,17 +93,19 @@ class PointOfSalesController extends GetxController {
 
   void addProductToCart({
     required int productId, 
+    required String productCode, 
+    required String productName,
     required int eceranId, 
     required int salePrice, 
     required RxInt quantity,
     required int stock,
     required RxInt subTotal,
-    required String productName,
     required String image
   }){
     cartDataList.add(
       CartProduct(
         productId: productId,
+        productCode: productCode,
         productName: productName,
         eceranId: eceranId,
         quantity: quantity,
@@ -135,19 +152,172 @@ class PointOfSalesController extends GetxController {
     for (var cartProduct in cartDataList) {
       total.value += cartProduct.subTotal!.value;
     }
-    print("total.value");
-    print(total.value);
+    debugPrint("total.value");
+    debugPrint(total.value.toString());
     for (var cartProduct in cartDataList) {
-      print('Product ID: ${cartProduct.productId}');
-      print('Product Name: ${cartProduct.productName}');
-      print('Eceran ID: ${cartProduct.eceranId}');
-      print('Quantity: ${cartProduct.quantity}');
-      print('Sale Price: ${cartProduct.salePrice}');
-      print('Subtotal: ${cartProduct.subTotal}');
-      print('Stock: ${cartProduct.stock}');
-      print('Image: ${cartProduct.image}');
-      print('\n'); // Add a new line for readability
+      debugPrint('Product ID: ${cartProduct.productId}');
+      debugPrint('Product Name: ${cartProduct.productName}');
+      debugPrint('Eceran ID: ${cartProduct.eceranId}');
+      debugPrint('Quantity: ${cartProduct.quantity}');
+      debugPrint('Sale Price: ${cartProduct.salePrice}');
+      debugPrint('Subtotal: ${cartProduct.subTotal}');
+      debugPrint('Stock: ${cartProduct.stock}');
+      debugPrint('Image: ${cartProduct.image}');
+      debugPrint('\n'); // Add a new line for readability
     }
     update();
+  }
+
+  Future<void> addCartDataRow() async {
+    int idx = 0;
+    cartDataRowList.clear();
+    for(CartProduct item in cartDataList){
+      cartDataRowList.add(
+        DataRow(
+          cells: [
+            DataCell(
+              Text(
+                (idx + 1).toString(),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            ),
+            DataCell(
+              Text(
+                item.productCode ?? "-",
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            ),
+            DataCell(
+              Text(
+                item.productName ?? "-",
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            ),
+            DataCell(
+              Text(
+                NumberFormat.currency(
+                  locale: 'id', 
+                  decimalDigits: 0,
+                  symbol: "Rp "
+                ).format(item.salePrice),
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            ),
+            DataCell(
+              Text(
+                item.quantity!.value.toString(),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            ),
+            DataCell(
+              Text(
+                NumberFormat.currency(
+                  locale: 'id', 
+                  decimalDigits: 0,
+                  symbol: "Rp "
+                ).format(item.subTotal!.value),
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            ),
+          ]
+        )
+      );
+      idx++;
+    }
+    update();
+  }
+
+  void addNewSale({
+    required DateTime saleDate, 
+    required BuildContext context,
+  }) async {
+    showLoading();
+    final dio = await AppDio().getBasicDIO();
+    DateTime saleDateUTC8 = saleDate.toUtc().add(const Duration(hours: 8));
+    String saleDateValue = saleDateUTC8.toIso8601String();
+
+    salesDetail.clear();
+    for (int i = 0; i < cartDataList.length; i++) {
+      Map<String, dynamic> saleDetail = {
+        "product_id": cartDataList[i].productId,
+        "eceran_id": cartDataList[i].eceranId,
+        "sale_price": cartDataList[i].salePrice,
+        "quantity": cartDataList[i].quantity!.value,
+        "subtotal":  cartDataList[i].subTotal!.value,
+      };
+      salesDetail.add(saleDetail);
+    }
+
+    debugPrint("user_id");
+    debugPrint(user?.userId.toString());
+    debugPrint("saleDateValue");
+    debugPrint(saleDateValue);
+    debugPrint("total_item");
+    debugPrint(salesDetail.length.toString());
+    debugPrint("total_price");
+    debugPrint(total.value.toString());
+    debugPrint("salesDetail");
+    print(salesDetail);
+
+    try {
+      final saleData = await dio.post(
+        BaseUrlLocal.sale,
+        data: {
+          "user_id" : user?.userId,
+          "sale_date": saleDateValue,
+          "total_item": salesDetail.length,
+          "total_price": total.value,
+          "sales_detail": salesDetail,
+        },
+      );
+      debugPrint('Tambah Transaksi: ${saleData.data}');
+      dismissLoading();
+      Get.back();
+      refreshPage();
+      // ignore: use_build_context_synchronously
+      PopUpWidget.successAndFailPopUp(
+        context: context, 
+        titleString: "Success!", 
+        middleText: "Transaksi berhasil ditambahkan.", 
+        buttonText: "OK"
+      );
+    } on DioError catch (error) {
+      dismissLoading();
+      SnackbarWidget.defaultSnackbar(
+        icon: const Icon(
+          Icons.cancel,
+          color: AppColors.red,
+        ),
+        title: "Error!",
+        subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
+      );
+      debugPrint(error.toString());
+    }
   }
 }

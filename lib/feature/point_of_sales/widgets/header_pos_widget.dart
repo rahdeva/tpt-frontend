@@ -107,6 +107,7 @@ class HeaderPOSWidget extends StatelessWidget {
                           );
                         }, 
                       ),
+                      const SizedBox(width: 16),
                     ],
                   ),
                 ),

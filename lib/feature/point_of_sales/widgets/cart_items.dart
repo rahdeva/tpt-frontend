@@ -137,7 +137,7 @@ class CartListItem extends StatelessWidget {
               controller.deleteCartItem(index);
             },
             icon: const Icon(
-              IconlyLight.delete,
+              IconlyBold.delete,
               size: 16,
               color: AppColors.red,
             ),

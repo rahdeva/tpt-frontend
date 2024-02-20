@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_controller.dart';
 import 'package:tpt_frontend/feature/point_of_sales/widgets/cart_list_builder.dart';
+import 'package:tpt_frontend/feature/point_of_sales/widgets/view_order_detail.dart';
 import 'package:tpt_frontend/resources/resources.dart';
-import 'package:tpt_frontend/utills/widget/button/primary_button.dart';
 import 'package:tpt_frontend/utills/widget/state/empty_state_widget.dart';
 
 class CartTotalWidget extends StatelessWidget {
@@ -49,16 +49,37 @@ class CartTotalWidget extends StatelessWidget {
                           fontWeight: FontWeight.w700
                         ),
                       ),
-                      IconButton(
-                        onPressed: (){
-                          controller.deleteAllCartData();
-                        }, 
-                        icon: const FaIcon(
-                          FontAwesomeIcons.trash,
-                          size: 16,
-                          color: AppColors.red,
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            AppColors.red,
+                          ),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            )
+                          )
+                        ),
+                        onPressed: () => controller.deleteAllCartData(),
+                        child: Row(
+                          children: [
+                            const FaIcon(
+                              FontAwesomeIcons.rotateLeft,
+                              size: 16,
+                              color: AppColors.white,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              "Reset",
+                              textAlign: TextAlign.left,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w600
+                              ),
+                            ),
+                          ],
                         )
-                      )
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -115,13 +136,9 @@ class CartTotalWidget extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                PrimaryButtonWidget(
-                  margin:  const EdgeInsets.all(0),
-                  buttonText: "Proceed", 
-                  onPressed: () async {
-                    
-                  },
-                ),
+                ViewOrderDetailButton(
+                  controller: controller
+                )
               ],
             ),
           ),

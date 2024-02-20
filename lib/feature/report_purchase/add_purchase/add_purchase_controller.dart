@@ -422,6 +422,8 @@ class AddPurchaseReportController extends GetxController {
     for (int i = 0; i < purchaseProductIdDataList.length; i++) {
       Map<String, dynamic> purchaseDetail = {
         "product_id": purchaseProductIdDataList[i],
+        // [FIX] Dummy
+        "eceran_id": 17,
         "purchase_price": purchasePriceDataList[i],
         "quantity": totalItemDataList[i],
         "subtotal": subTotalDataList[i]
