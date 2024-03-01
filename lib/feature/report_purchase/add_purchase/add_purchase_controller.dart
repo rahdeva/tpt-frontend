@@ -480,4 +480,3 @@ class AddPurchaseReportController extends GetxController {
     }
   }
 }
-
