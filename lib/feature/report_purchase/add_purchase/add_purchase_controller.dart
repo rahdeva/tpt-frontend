@@ -475,7 +475,7 @@ class AddPurchaseReportController extends GetxController {
         ),
         title: "Error!",
         subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
-      ); 
+      );  
       debugPrint(error.toString());
     }
   }
