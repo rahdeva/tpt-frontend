@@ -478,5 +478,5 @@ class AddPurchaseReportController extends GetxController {
       );  
       debugPrint(error.toString());
     }
-  }
+  } 
 }
