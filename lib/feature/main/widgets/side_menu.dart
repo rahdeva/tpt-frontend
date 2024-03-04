@@ -222,12 +222,21 @@ class PemasaranRoleMenus extends StatelessWidget {
             color: AppColors.white,
           ),
         ),
+        // MenuItem(
+        //   controller: controller,
+        //   title: "History",
+        //   tabIndex: 3,
+        //   icon: const Icon(
+        //     IconlyBold.activity,
+        //     color: AppColors.white,
+        //   ),
+        // ),
         MenuItem(
           controller: controller,
-          title: "History",
-          tabIndex: 3,
-          icon: const Icon(
-            IconlyBold.activity,
+          title: "Sale",
+          tabIndex: 8,
+          icon: const FaIcon(
+            FontAwesomeIcons.upload,
             color: AppColors.white,
           ),
         ),

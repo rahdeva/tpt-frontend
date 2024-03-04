@@ -32,7 +32,7 @@ class UserController extends GetxController {
 
   Rx<int> page = Rx(1);
   Rx<int> totalItems = Rx(0);
-  Rx<int> pageSize = Rx(10);
+  Rx<int> pageSize = Rx(5);
   Rx<bool> loadNext = Rx(false);
   Rx<String> searchKeyword = Rx("");
 
@@ -55,7 +55,7 @@ class UserController extends GetxController {
   Future<void> refreshPage() async {
     dataList.clear();
     page.value = 1;
-    pageSize.value = 10;
+    pageSize.value = 5;
     searchformKey.currentState?.reset();
     searchKeyword.value = "";
     tableKey.currentState?.pageTo(1);
