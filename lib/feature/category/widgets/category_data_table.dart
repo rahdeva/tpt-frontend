@@ -53,12 +53,6 @@ class CategoryDataSource extends DataTableSource {
           )
         ),
         DataCell(
-          Text(
-            item.categoryColor ?? "-",
-            style: Theme.of(context).textTheme.bodyMedium
-          )
-        ),
-        DataCell(
           Container(
             margin: const EdgeInsets.all(8),
             child: Row(

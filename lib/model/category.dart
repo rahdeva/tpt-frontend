@@ -52,7 +52,6 @@ class Category {
     int? categoryId;
     String? categoryName;
     String? categoryCode;
-    String? categoryColor;
     DateTime? createdAt;
     DateTime? updatedAt;
 
@@ -60,7 +59,6 @@ class Category {
         this.categoryId,
         this.categoryName,
         this.categoryCode,
-        this.categoryColor,
         this.createdAt,
         this.updatedAt,
     });
@@ -69,7 +67,6 @@ class Category {
         categoryId: json["category_id"],
         categoryName: json["category_name"],
         categoryCode: json["category_code"],
-        categoryColor: json["category_color"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );
@@ -78,7 +75,6 @@ class Category {
         "category_id": categoryId,
         "category_name": categoryName,
         "category_code": categoryCode,
-        "category_color": categoryColor,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
     };

@@ -112,7 +112,6 @@ class CategoryController extends GetxController {
   void addNewCategory({
     required String categoryCode, 
     required String categoryName,
-    required String categoryColor,
     required BuildContext context,
   }) async {
     showLoading();
@@ -124,7 +123,6 @@ class CategoryController extends GetxController {
         data: {
           "category_code": categoryCode,
           "category_name": categoryName,
-          "category_color": categoryColor,
         },
       );
       debugPrint('Tambah Kategori: ${categoryData.data}');
@@ -171,12 +169,10 @@ class CategoryController extends GetxController {
       ? editCategoryFormKey.currentState!.patchValue({
           "category_code": dataObject.categoryCode,
           "category_name": dataObject.categoryName,
-          "category_color": dataObject.categoryColor,
         })
       : deleteCategoryFormKey.currentState!.patchValue({
           "category_code": dataObject.categoryCode,
           "category_name": dataObject.categoryName,
-          "category_color": dataObject.categoryColor,
         });
       update();
     } on DioError catch (error) {
@@ -190,7 +186,6 @@ class CategoryController extends GetxController {
     required int categoryId, 
     required String categoryCode, 
     required String categoryName,
-    required String categoryColor,
     required BuildContext context,
   }) async {
     showLoading();
@@ -203,7 +198,6 @@ class CategoryController extends GetxController {
           "category_id": categoryId,
           "category_code": categoryCode,
           "category_name": categoryName,
-          "category_color": categoryColor,
         },
       );
       debugPrint('Edit Category: ${categoryData.data}');

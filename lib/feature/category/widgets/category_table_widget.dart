@@ -36,7 +36,7 @@ class CategoryTableWidget extends StatelessWidget {
                     key: controller.tableKey,
                     columnSpacing : 0,
                     rowsPerPage: controller.pageSize.value,
-                    availableRowsPerPage: const [5, 10, 25],
+                    availableRowsPerPage: const [5, 10, 12],
                     headingRowHeight: 46,
                     onRowsPerPageChanged: (value) {
                       controller.onRowsPerPageChanged(value!);
@@ -56,9 +56,6 @@ class CategoryTableWidget extends StatelessWidget {
                       ),
                       dataColumnWidget(
                         context, labelText: "Nama Kategori"
-                      ),
-                      dataColumnWidget(
-                        context, labelText: "Warna Kategori"
                       ),
                       dataColumnWidget(
                         context, labelText: "Aksi"
