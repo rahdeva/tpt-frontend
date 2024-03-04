@@ -98,30 +98,30 @@ class SettingPage extends StatelessWidget {
                                               )
                                             ),
                                             const SizedBox(height: 24),
-                                            PrimaryButtonWidget(
-                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                const RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.horizontal(
-                                                    left: Radius.circular(10),
-                                                    right: Radius.circular(0),
-                                                  )
-                                                ),
-                                              ),
-                                              customColors: controller.settingTabIndex == 1
-                                                ? AppColors.background1
-                                                : AppColors.black.withOpacity(0.2),
-                                              margin: const EdgeInsets.all(0),
-                                              buttonText: "Device", 
-                                              onPressed: () async {
-                                                controller.changeTabIndex(1);
-                                              },
-                                              textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                                color: controller.settingTabIndex == 1
-                                                  ? AppColors.white
-                                                  : AppColors.white.withOpacity(0.5),
-                                                fontWeight: FontWeight.w600
-                                              )
-                                            ),
+                                            // PrimaryButtonWidget(
+                                            //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                            //     const RoundedRectangleBorder(
+                                            //       borderRadius: BorderRadius.horizontal(
+                                            //         left: Radius.circular(10),
+                                            //         right: Radius.circular(0),
+                                            //       )
+                                            //     ),
+                                            //   ),
+                                            //   customColors: controller.settingTabIndex == 1
+                                            //     ? AppColors.background1
+                                            //     : AppColors.black.withOpacity(0.2),
+                                            //   margin: const EdgeInsets.all(0),
+                                            //   buttonText: "Device", 
+                                            //   onPressed: () async {
+                                            //     controller.changeTabIndex(1);
+                                            //   },
+                                            //   textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                            //     color: controller.settingTabIndex == 1
+                                            //       ? AppColors.white
+                                            //       : AppColors.white.withOpacity(0.5),
+                                            //     fontWeight: FontWeight.w600
+                                            //   )
+                                            // ),
                                           ],
                                         ),
                                         PrimaryButtonWidget(
