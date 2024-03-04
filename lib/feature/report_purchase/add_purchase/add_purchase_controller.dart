@@ -467,7 +467,7 @@ class AddPurchaseReportController extends GetxController {
         buttonText: "OK"
       );
     } on DioError catch (error) {
-      dismissLoading();
+      dismissLoading(); 
       SnackbarWidget.defaultSnackbar(
         icon: const Icon(
           Icons.cancel,
