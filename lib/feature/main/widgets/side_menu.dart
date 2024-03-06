@@ -414,7 +414,7 @@ class KeuanganRoleMenus extends StatelessWidget {
             FontAwesomeIcons.wallet,
             color: AppColors.white,
           ),
-        ), 
+        ),
       ],
     );
   }
