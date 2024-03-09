@@ -413,7 +413,7 @@ class KeuanganRoleMenus extends StatelessWidget {
           icon: const FaIcon(
             FontAwesomeIcons.wallet,
             color: AppColors.white,
-          ), 
+          ),
         ),
       ],
     );
