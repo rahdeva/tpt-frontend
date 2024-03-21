@@ -1,6 +1,8 @@
 import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tpt_frontend/feature/dashboard_transaction/widgets/bar_chart_sample2.dart';
+import 'package:tpt_frontend/feature/dashboard_transaction/widgets/bar_chart_sample_widget.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/helper/responsive.dart';
 import 'package:sizer/sizer.dart';
@@ -56,6 +58,19 @@ class TransactionDashboardPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 24),
+                            Container(
+                              width: 40.w,
+                              height: 360,
+                              child: Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                                color: AppColors.white,
+                                child: BarChartSample8()
+                              )
+                            ),
+                            
                           ],
                         ),
                       ),
@@ -70,3 +85,4 @@ class TransactionDashboardPage extends StatelessWidget {
     );
   }
 }
+
