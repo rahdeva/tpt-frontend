@@ -1,4 +1,4 @@
-import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_controller.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_controller.dart';
 import 'package:get/get.dart';
 
 class TransactionDashboardBinding extends Bindings {

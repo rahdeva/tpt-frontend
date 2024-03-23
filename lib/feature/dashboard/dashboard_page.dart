@@ -1,8 +1,8 @@
-import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_controller.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tpt_frontend/feature/dashboard_transaction/widgets/column_chart_widget.dart';
-import 'package:tpt_frontend/feature/dashboard_transaction/widgets/pie_chart_widget.dart';
+import 'package:tpt_frontend/feature/dashboard/widgets/column_chart_widget.dart';
+import 'package:tpt_frontend/feature/dashboard/widgets/pie_chart_widget.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/helper/responsive.dart';
 import 'package:sizer/sizer.dart';

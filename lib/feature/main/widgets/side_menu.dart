@@ -153,31 +153,31 @@ class AdminRoleMenus extends StatelessWidget {
         const FeaturesDivider(title: "Dashboard"),
         MenuItem(
           controller: controller,
-          title: "Transaction",
+          title: "Dashboard",
           tabIndex: 11,
           icon: const FaIcon(
-            FontAwesomeIcons.cartShopping,
+            FontAwesomeIcons.squarePollVertical,
             color: AppColors.white,
           ),
         ),
-        MenuItem(
-          controller: controller,
-          title: "Financial",
-          tabIndex: 12,
-          icon: const FaIcon(
-            FontAwesomeIcons.wallet,
-            color: AppColors.white,
-          ),
-        ),
-        MenuItem(
-          controller: controller,
-          title: "Forecasting",
-          tabIndex: 13,
-          icon: const Icon(
-            IconlyBold.work,
-            color: AppColors.white,
-          ),
-        ),
+        // MenuItem(
+        //   controller: controller,
+        //   title: "Financial",
+        //   tabIndex: 12,
+        //   icon: const FaIcon(
+        //     FontAwesomeIcons.wallet,
+        //     color: AppColors.white,
+        //   ),
+        // ),
+        // MenuItem(
+        //   controller: controller,
+        //   title: "Forecasting",
+        //   tabIndex: 13,
+        //   icon: const Icon(
+        //     IconlyBold.work,
+        //     color: AppColors.white,
+        //   ),
+        // ),
       ],
     );
   }
@@ -322,16 +322,16 @@ class PembelianGudangRoleMenus extends StatelessWidget {
             color: AppColors.white,
           ),
         ),
-        const FeaturesDivider(title: "Dashboard"),
-        MenuItem(
-          controller: controller,
-          title: "Transaction",
-          tabIndex: 11,
-          icon: const FaIcon(
-            FontAwesomeIcons.cartShopping,
-            color: AppColors.white,
-          ),
-        ),
+        // const FeaturesDivider(title: "Dashboard"),
+        // MenuItem(
+        //   controller: controller,
+        //   title: "Transaction",
+        //   tabIndex: 11,
+        //   icon: const FaIcon(
+        //     FontAwesomeIcons.cartShopping,
+        //     color: AppColors.white,
+        //   ),
+        // ),
       ],
     );
   }
@@ -396,25 +396,25 @@ class KeuanganRoleMenus extends StatelessWidget {
           ),
         ),
         // Dashboard
-        const FeaturesDivider(title: "Dashboard"),
-        MenuItem(
-          controller: controller,
-          title: "Transaction",
-          tabIndex: 11,
-          icon: const FaIcon(
-            FontAwesomeIcons.cartShopping,
-            color: AppColors.white,
-          ),
-        ),
-        MenuItem(
-          controller: controller,
-          title: "Financial",
-          tabIndex: 12,
-          icon: const FaIcon(
-            FontAwesomeIcons.wallet,
-            color: AppColors.white,
-          ),
-        ),
+        // const FeaturesDivider(title: "Dashboard"),
+        // MenuItem(
+        //   controller: controller,
+        //   title: "Transaction",
+        //   tabIndex: 11,
+        //   icon: const FaIcon(
+        //     FontAwesomeIcons.cartShopping,
+        //     color: AppColors.white,
+        //   ),
+        // ),
+        // MenuItem(
+        //   controller: controller,
+        //   title: "Financial",
+        //   tabIndex: 12,
+        //   icon: const FaIcon(
+        //     FontAwesomeIcons.wallet,
+        //     color: AppColors.white,
+        //   ),
+        // ),
       ],
     );
   }

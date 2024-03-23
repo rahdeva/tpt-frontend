@@ -1,7 +1,5 @@
 import 'package:tpt_frontend/feature/category/category_page.dart';
-import 'package:tpt_frontend/feature/dashboard_financial/dashboard_financial_page.dart';
-import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting_page.dart';
-import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_page.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_page.dart';
 import 'package:tpt_frontend/feature/history/history_page.dart';
 import 'package:tpt_frontend/feature/home/home_page.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_page.dart';
@@ -57,8 +55,6 @@ class MainController extends GetxController {
     const PurchaseReportPage(),
     const FinancialReportPage(),
     const TransactionDashboardPage(),
-    const FinancialDashboardPage(),
-    const ForecastingDashboardPage(),
   ];
 
   void changeTabIndex(int index) {

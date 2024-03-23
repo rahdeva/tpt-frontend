@@ -1,11 +1,7 @@
 import 'package:tpt_frontend/feature/category/category_binding.dart';
 import 'package:tpt_frontend/feature/category/category_page.dart';
-import 'package:tpt_frontend/feature/dashboard_financial/dashboard_financial_binding.dart';
-import 'package:tpt_frontend/feature/dashboard_financial/dashboard_financial_page.dart';
-import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting_binding.dart';
-import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting_page.dart';
-import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_binding.dart';
-import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_page.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_binding.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_page.dart';
 import 'package:tpt_frontend/feature/history/history_binding.dart';
 import 'package:tpt_frontend/feature/history/history_page.dart';
 import 'package:tpt_frontend/feature/home/home_binding.dart';
@@ -51,8 +47,6 @@ class PageRoutes {
     PurchaseReportBinding(),
     FinancialReportBinding(),
     TransactionDashboardBinding(),
-    FinancialDashboardBinding(),
-    ForecastingDashboardBinding(),
   ];
 
   static final pages = [
@@ -124,16 +118,6 @@ class PageRoutes {
       name: PageName.DASHBOARD_TRANSACTION,
       page: () => const TransactionDashboardPage(),
       binding: TransactionDashboardBinding()
-    ),
-    GetPage(
-      name: PageName.DASHBOARD_FINANCIAL,
-      page: () => const FinancialDashboardPage(),
-      binding: FinancialDashboardBinding()
-    ),
-    GetPage(
-      name: PageName.DASHBOARD_FORECASTING,
-      page: () => const ForecastingDashboardPage(),
-      binding: ForecastingDashboardBinding()
     ),
     GetPage(
       name: PageName.POINTOFSALES,

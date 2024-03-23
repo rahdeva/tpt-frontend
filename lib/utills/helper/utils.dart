@@ -1,7 +1,5 @@
 import 'package:tpt_frontend/feature/category/category_controller.dart';
-import 'package:tpt_frontend/feature/dashboard_financial/dashboard_financial_controller.dart';
-import 'package:tpt_frontend/feature/dashboard_forecasting/dashboard_forecasting_controller.dart';
-import 'package:tpt_frontend/feature/dashboard_transaction/dashboard_transaction_controller.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_controller.dart';
 import 'package:tpt_frontend/feature/history/history_controller.dart';
 import 'package:tpt_frontend/feature/home/home_controller.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_controller.dart';
@@ -71,12 +69,6 @@ class Utils {
         break;
       case 11:
         Get.delete<TransactionDashboardController>();
-        break;
-      case 12:
-        Get.delete<FinancialDashboardController>();
-        break;
-      case 13:
-        Get.delete<ForecastingDashboardController>();
         break;
       default:
     }
