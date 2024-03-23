@@ -98,14 +98,6 @@ class ProductDataSource extends DataTableSource {
           )
         ),
         DataCell(
-          Text(
-            item.sold == null
-            ? "-"
-            : item.sold.toString(),
-            style: Theme.of(context).textTheme.bodyMedium
-          )
-        ),
-        DataCell(
           Container(
             margin: const EdgeInsets.all(8),
             child: Row(

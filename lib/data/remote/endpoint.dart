@@ -67,7 +67,34 @@ class BaseUrlLocal {
   // Home
   static String home = "$baseUrlLocal/home";
 
-  // Dashboard
+  // Dashboard Summary
+  static String dashboardProductByCategory = "$baseUrlLocal/dashboard/summary/product_by_category";
+  static String dashboardTopStockProduct = "$baseUrlLocal/dashboard/summary/top_stock_product";
+  static String dashboardTopExpensiveProduct = "$baseUrlLocal/dashboard/summary/top_expensive_product";
+
+  // Dashboard Sale
+  static String dashboardTotalSaleTransactions = "$baseUrlLocal/dashboard/sale/total_transaction";
+  static String dashboardTotalSales = "$baseUrlLocal/dashboard/sale/total_sale";
+  static String dashboardTotalItemSold = "$baseUrlLocal/dashboard/sale/total_item_sold";
+  static String dashboardTotalProfit = "$baseUrlLocal/dashboard/sale/total_profit";
+  static String dashboardTopSaleProduct = "$baseUrlLocal/dashboard/sale/top_sale_product";
+
+  // Dashboard Purchase
+  static String dashboardTotalPurchaseTransactions = "$baseUrlLocal/dashboard/purchase/total_transaction";
+  static String dashboardTotalPurchase = "$baseUrlLocal/dashboard/purchase/total_purchase";
+  static String dashboardTotalItemPurchased = "$baseUrlLocal/dashboard/purchase/total_item_purchased";
+  static String dashboardTopSupplier = "$baseUrlLocal/dashboard/purchase/top_supplier";
+
+  // Dashboard Financial
+  static String dashboardCashFlow = "$baseUrlLocal/dashboard/financial/cash_in_cash_out";
+  static String dashboardCashByType = "$baseUrlLocal/dashboard/financial/cash_by_type";
+  static String dashboardCashIn = "$baseUrlLocal/dashboard/financial/cash_in";
+  static String dashboardCashOut = "$baseUrlLocal/dashboard/financial/cash_out";
+
+  // Dashboard Forecasting
+  static String dashboardSaleForecasting = "$baseUrlLocal/dashboard/forecasting/sale";
+  static String dashboardPurchaseForecasting = "$baseUrlLocal/dashboard/forecasting/purchase";
+  static String dashboardMAEForecasting = "$baseUrlLocal/dashboard/forecasting/mae";
 
 }
 

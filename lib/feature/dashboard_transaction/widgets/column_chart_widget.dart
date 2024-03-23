@@ -1,21 +1,21 @@
-import 'dart:math';
-
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 
-class BarChartSample8 extends StatefulWidget {
-  BarChartSample8({super.key});
+class ColumnChartWidget extends StatelessWidget {
+  const ColumnChartWidget({
+    super.key,
+    required this.title, 
+    required this.length, 
+    required this.label, 
+    required this.value,
+  });
 
-  final Color barBackgroundColor = AppColors.red.withOpacity(0.3);
-  final Color barColor = AppColors.red;
+  final int length;
+  final String title;
+  final List<String> label;
+  final List<int> value;
 
-  @override
-  State<StatefulWidget> createState() => BarChartSample1State();
-}
-
-class BarChartSample1State extends State<BarChartSample8> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -30,9 +30,9 @@ class BarChartSample1State extends State<BarChartSample8> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Total Penjualan',
-                  style: TextStyle(
-                    color: widget.barColor,
+                  title,
+                  style: const TextStyle(
+                    color: AppColors.primary,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -83,11 +83,8 @@ class BarChartSample1State extends State<BarChartSample8> {
                     )
                   ),
                   barGroups: List.generate(
-                    7,
-                    (i) => makeGroupData(
-                      i,
-                      Random().nextInt(500).toDouble(),
-                    ),
+                    length,
+                    (i) => makeGroupData(i, value[i].toDouble()), // Menggunakan data yang telah diberikan
                   ),
                   gridData: const FlGridData(show: false),
                 )
@@ -101,20 +98,31 @@ class BarChartSample1State extends State<BarChartSample8> {
 
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
-      color: Colors.red,
+      color: AppColors.primary,
       fontWeight: FontWeight.bold,
       fontSize: 14,
+      
     );
-    List<String> days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    // List<String> label = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
     Widget text = Text(
-      days[value.toInt()],
+      label[value.toInt()],
       style: style,
+      maxLines: 3,
+      softWrap: true,
     );
 
+    // return SideTitleWidget(
+    //   axisSide: meta.axisSide,
+    //   child: Container(
+    //     width: 20,
+    //     child: text
+    //   ),
+    // );
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: text,
+      angle: 12,
+      child:  text,
     );
   }
   
@@ -128,10 +136,13 @@ class BarChartSample1State extends State<BarChartSample8> {
         BarChartRodData(
           fromY: 0,
           toY: y,
-          color: widget.barColor,
+          color: AppColors.primary,
           borderRadius: BorderRadius.zero,
           width: 24,
-          borderSide: BorderSide(color: widget.barColor, width: 2.0),
+          borderSide: const BorderSide(
+            color: AppColors.primary, 
+            width: 2.0
+          ),
         ),
       ],
     );
