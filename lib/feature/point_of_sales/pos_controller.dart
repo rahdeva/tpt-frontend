@@ -316,6 +316,8 @@ class PointOfSalesController extends GetxController {
       dismissLoading();
       Get.back();
       refreshPage();
+      cartDataList.clear();
+      total.value = 0;
       // ignore: use_build_context_synchronously
       PopUpWidget.successAndFailPopUp(
         context: context, 

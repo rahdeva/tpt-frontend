@@ -166,101 +166,101 @@ class AddProductButton extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 32),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 10.w - 16,
-                      child: Text(
-                        "Varian Produk",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const LabelFormWidget2(
-                              label: "Harga Beli"
-                            ),
-                            SizedBox(
-                              width: 40.w - 16,
-                              child: TextFieldWidget(
-                                name: 'purchase_price',
-                                hintText: "",
-                                validator: Validator.required(),
-                                keyboardType: TextInputType.number,
-                                borderRadius: 10,
-                                contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
-                                textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                  color: AppColors.black,
-                                  fontWeight: FontWeight.w400
-                                ),
-                                inputFormatters: <TextInputFormatter>[
-                                  CurrencyTextInputFormatter(
-                                    locale: 'id',
-                                    decimalDigits: 0,
-                                    symbol: 'Rp ',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 24),
-                        Row(
-                          children: [
-                            const LabelFormWidget2(
-                              label: "Harga Jual"
-                            ),
-                            SizedBox(
-                              width: 40.w - 16,
-                              child: TextFieldWidget(
-                                name: 'sale_price',
-                                hintText: "",
-                                validator: Validator.required(),
-                                keyboardType: TextInputType.number,
-                                borderRadius: 10,
-                                contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
-                                textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                  color: AppColors.black,
-                                  fontWeight: FontWeight.w400
-                                ),
-                                inputFormatters: <TextInputFormatter>[
-                                  CurrencyTextInputFormatter(
-                                    locale: 'id',
-                                    decimalDigits: 0,
-                                    symbol: 'Rp ',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 24),
-                        Row(
-                          children: [
-                            const SizedBox(width: 16),
-                            const LabelFormWidget2(
-                              label: "Gambar"
-                            ),
-                            ImagePickerWidget(
-                              image: controller.newImage,
-                              onTap: (){
-                                // controller.showSelectImageOptions(context);
-                              }
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 24),
-                      ],
-                    ),
-                  ],
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     SizedBox(
+                //       width: 10.w - 16,
+                //       child: Text(
+                //         "Varian Produk",
+                //         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                //           color: AppColors.black,
+                //           fontWeight: FontWeight.w500,
+                //         ),
+                //       ),
+                //     ),
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: [
+                //         Row(
+                //           children: [
+                //             const LabelFormWidget2(
+                //               label: "Harga Beli"
+                //             ),
+                //             SizedBox(
+                //               width: 40.w - 16,
+                //               child: TextFieldWidget(
+                //                 name: 'purchase_price',
+                //                 hintText: "",
+                //                 validator: Validator.required(),
+                //                 keyboardType: TextInputType.number,
+                //                 borderRadius: 10,
+                //                 contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
+                //                 textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                //                   color: AppColors.black,
+                //                   fontWeight: FontWeight.w400
+                //                 ),
+                //                 inputFormatters: <TextInputFormatter>[
+                //                   CurrencyTextInputFormatter(
+                //                     locale: 'id',
+                //                     decimalDigits: 0,
+                //                     symbol: 'Rp ',
+                //                   ),
+                //                 ],
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //         const SizedBox(height: 24),
+                //         Row(
+                //           children: [
+                //             const LabelFormWidget2(
+                //               label: "Harga Jual"
+                //             ),
+                //             SizedBox(
+                //               width: 40.w - 16,
+                //               child: TextFieldWidget(
+                //                 name: 'sale_price',
+                //                 hintText: "",
+                //                 validator: Validator.required(),
+                //                 keyboardType: TextInputType.number,
+                //                 borderRadius: 10,
+                //                 contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
+                //                 textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                //                   color: AppColors.black,
+                //                   fontWeight: FontWeight.w400
+                //                 ),
+                //                 inputFormatters: <TextInputFormatter>[
+                //                   CurrencyTextInputFormatter(
+                //                     locale: 'id',
+                //                     decimalDigits: 0,
+                //                     symbol: 'Rp ',
+                //                   ),
+                //                 ],
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //         const SizedBox(height: 24),
+                //         Row(
+                //           children: [
+                //             const SizedBox(width: 16),
+                //             const LabelFormWidget2(
+                //               label: "Gambar"
+                //             ),
+                //             ImagePickerWidget(
+                //               image: controller.newImage,
+                //               onTap: (){
+                //                 // controller.showSelectImageOptions(context);
+                //               }
+                //             ),
+                //           ],
+                //         ),
+                //         const SizedBox(height: 24),
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 Container(
                   margin: const EdgeInsets.only(right: 16),
                   alignment: Alignment.centerRight,

@@ -35,6 +35,7 @@ class PieChart2State extends State<PieChartSample> {
               children: [
                 Text(
                   widget.title,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: AppColors.primary,
                     fontSize: 18,
