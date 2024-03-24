@@ -80,15 +80,11 @@ class Product {
     int? productId;
     int? categoryId;
     String? categoryName;
-    String? categoryColor;
     String? productName;
-    int? purchasePrice;
-    String? productCode;
-    int? eceranId;
+    String? unit;
     String? brand;
-    int? salePrice;
     int? stock;
-    String? image;
+    int? totalVariant;
     DateTime? createdAt;
     DateTime? updatedAt;
 
@@ -96,15 +92,11 @@ class Product {
         this.productId,
         this.categoryId,
         this.categoryName,
-        this.categoryColor,
         this.productName,
-        this.purchasePrice,
-        this.productCode,
-        this.eceranId,
+        this.unit,
         this.brand,
-        this.salePrice,
         this.stock,
-        this.image,
+        this.totalVariant,
         this.createdAt,
         this.updatedAt,
     });
@@ -113,15 +105,11 @@ class Product {
         productId: json["product_id"],
         categoryId: json["category_id"],
         categoryName: json["category_name"],
-        categoryColor: json["category_color"],
         productName: json["product_name"],
-        purchasePrice: json["purchase_price"],
-        productCode: json["product_code"],
-        eceranId: json["eceran_id"],
+        unit: json["unit"],
         brand: json["brand"],
-        salePrice: json["sale_price"],
         stock: json["stock"],
-        image: json["image"],
+        totalVariant: json["total_variant"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );
@@ -130,15 +118,11 @@ class Product {
         "product_id": productId,
         "category_id": categoryId,
         "category_name": categoryName,
-        "category_color": categoryColor,
         "product_name": productName,
-        "purchase_price": purchasePrice,
-        "product_code": productCode,
-        "eceran_id": eceranId,
+        "unit": unit,
         "brand": brand,
-        "sale_price": salePrice,
         "stock": stock,
-        "image": image,
+        "total_variant": totalVariant,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
     };

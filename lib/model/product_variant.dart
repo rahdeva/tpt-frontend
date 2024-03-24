@@ -1,23 +1,23 @@
 // To parse this JSON data, do
 //
-//     final purchaseDetailResponse = purchaseDetailResponseFromJson(jsonString);
+//     final productVariantResponse = productVariantResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-PurchaseDetailResponse purchaseDetailResponseFromJson(String str) => PurchaseDetailResponse.fromJson(json.decode(str));
+ProductVariantResponse productVariantResponseFromJson(String str) => ProductVariantResponse.fromJson(json.decode(str));
 
-String purchaseDetailResponseToJson(PurchaseDetailResponse data) => json.encode(data.toJson());
+String productVariantResponseToJson(ProductVariantResponse data) => json.encode(data.toJson());
 
-class PurchaseDetailResponse {
+class ProductVariantResponse {
     Data? data;
     String? error;
 
-    PurchaseDetailResponse({
+    ProductVariantResponse({
         this.data,
         this.error,
     });
 
-    factory PurchaseDetailResponse.fromJson(Map<String, dynamic> json) => PurchaseDetailResponse(
+    factory ProductVariantResponse.fromJson(Map<String, dynamic> json) => ProductVariantResponse(
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
         error: json["error"],
     );
@@ -30,25 +30,21 @@ class PurchaseDetailResponse {
 
 class Data {
     Meta? meta;
-    List<PurchaseDetail>? purchaseDetail;
-    int? purchaseId;
+    List<ProductVariant>? productVariant;
 
     Data({
         this.meta,
-        this.purchaseDetail,
-        this.purchaseId,
+        this.productVariant,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
-        purchaseDetail: json["purchase_detail"] == null ? [] : List<PurchaseDetail>.from(json["purchase_detail"]!.map((x) => PurchaseDetail.fromJson(x))),
-        purchaseId: json["purchase_id"],
+        productVariant: json["product_variant"] == null ? [] : List<ProductVariant>.from(json["product_variant"]!.map((x) => ProductVariant.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "meta": meta?.toJson(),
-        "purchase_detail": purchaseDetail == null ? [] : List<dynamic>.from(purchaseDetail!.map((x) => x.toJson())),
-        "purchase_id": purchaseId,
+        "product_variant": productVariant == null ? [] : List<dynamic>.from(productVariant!.map((x) => x.toJson())),
     };
 }
 
@@ -80,61 +76,77 @@ class Meta {
     };
 }
 
-class PurchaseDetail {
-    int? purchaseDetailId;
-    int? purchaseId;
+class ProductVariant {
     int? productVariantId;
+    int? productId;
+    int? categoryId;
+    String? categoryName;
     String? variantName;
     String? productVariantCode;
     String? productVariantName;
     int? productQuantity;
     int? purchasePrice;
-    int? quantity;
-    int? subtotal;
+    int? salePrice;
+    int? sold;
+    String? image;
+    String? brand;
+    int? variantStock;
     DateTime? createdAt;
     DateTime? updatedAt;
 
-    PurchaseDetail({
-        this.purchaseDetailId,
-        this.purchaseId,
+    ProductVariant({
         this.productVariantId,
+        this.productId,
+        this.categoryId,
+        this.categoryName,
         this.variantName,
         this.productVariantCode,
         this.productVariantName,
         this.productQuantity,
         this.purchasePrice,
-        this.quantity,
-        this.subtotal,
+        this.salePrice,
+        this.sold,
+        this.image,
+        this.brand,
+        this.variantStock,
         this.createdAt,
         this.updatedAt,
     });
 
-    factory PurchaseDetail.fromJson(Map<String, dynamic> json) => PurchaseDetail(
-        purchaseDetailId: json["purchase_detail_id"],
-        purchaseId: json["purchase_id"],
+    factory ProductVariant.fromJson(Map<String, dynamic> json) => ProductVariant(
         productVariantId: json["product_variant_id"],
+        productId: json["product_id"],
+        categoryId: json["category_id"],
+        categoryName: json["category_name"],
         variantName: json["variant_name"],
         productVariantCode: json["product_variant_code"],
         productVariantName: json["product_variant_name"],
         productQuantity: json["product_quantity"],
         purchasePrice: json["purchase_price"],
-        quantity: json["quantity"],
-        subtotal: json["subtotal"],
+        salePrice: json["sale_price"],
+        sold: json["sold"],
+        image: json["image"],
+        brand: json["brand"],
+        variantStock: json["variant_stock"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "purchase_detail_id": purchaseDetailId,
-        "purchase_id": purchaseId,
         "product_variant_id": productVariantId,
+        "product_id": productId,
+        "category_id": categoryId,
+        "category_name": categoryName,
         "variant_name": variantName,
         "product_variant_code": productVariantCode,
         "product_variant_name": productVariantName,
         "product_quantity": productQuantity,
         "purchase_price": purchasePrice,
-        "quantity": quantity,
-        "subtotal": subtotal,
+        "sale_price": salePrice,
+        "sold": sold,
+        "image": image,
+        "brand": brand,
+        "variant_stock": variantStock,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
     };

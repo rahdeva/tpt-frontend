@@ -1,4 +1,5 @@
 import 'package:tpt_frontend/feature/user/user_controller.dart';
+import 'package:tpt_frontend/feature/user/widgets/delete_user.dart';
 // import 'package:tpt_frontend/feature/user/widgets/delete_user.dart';
 import 'package:tpt_frontend/feature/user/widgets/edit_user.dart';
 import 'package:tpt_frontend/model/user.dart';
@@ -101,11 +102,11 @@ class UserDataSource extends DataTableSource {
                   userId: item.userId!,
                   controller: controller,
                 ),
-                // const SizedBox(width: 12),
-                // DeleteUserButton(
-                //   userId: item.userId!,
-                //   controller: controller
-                // )
+                const SizedBox(width: 12),
+                DeleteUserButton(
+                  userId: item.userId!,
+                  controller: controller
+                )
               ],
             ),
           ),

@@ -34,7 +34,7 @@ class AddProductButton extends StatelessWidget {
         size: 16,
       ), 
       onPressed: () {
-        PopUpWidget.defaultPopUp(
+        PopUpWidget.inputPopUp(
           context: context,
           width: 60.w,
           titleString: "Tambah Produk", 
@@ -54,13 +54,13 @@ class AddProductButton extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 50.w - 16,
-                      height: 32,
                       child: TextFieldWidget(
                         name: 'product_code',
                         hintText: "",
                         validator: Validator.required(),
                         keyboardType: TextInputType.text,
                         borderRadius: 10,
+                        contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                         textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: AppColors.black,
                           fontWeight: FontWeight.w400
@@ -78,13 +78,13 @@ class AddProductButton extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 50.w - 16,
-                      height: 32,
                       child: TextFieldWidget(
                         name: 'product_name',
                         hintText: "",
                         validator: Validator.required(),
                         keyboardType: TextInputType.text,
                         borderRadius: 10,
+                        contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                         textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: AppColors.black,
                           fontWeight: FontWeight.w400
@@ -102,13 +102,13 @@ class AddProductButton extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 50.w - 16,
-                      height: 32,
                       child: TextFieldWidget(
                         name: 'category_id',
                         hintText: "",
                         validator: Validator.required(),
                         keyboardType: TextInputType.number,
                         borderRadius: 10,
+                        contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                         textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: AppColors.black,
                           fontWeight: FontWeight.w400
@@ -126,79 +126,17 @@ class AddProductButton extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 50.w - 16,
-                      height: 32,
                       child: TextFieldWidget(
                         name: 'brand',
                         hintText: "",
                         validator: Validator.required(),
                         keyboardType: TextInputType.text,
                         borderRadius: 10,
+                        contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                         textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: AppColors.black,
                           fontWeight: FontWeight.w400
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    const LabelFormWidget2(
-                      label: "Harga Beli"
-                    ),
-                    SizedBox(
-                      width: 50.w - 16,
-                      height: 32,
-                      child: TextFieldWidget(
-                        name: 'purchase_price',
-                        hintText: "",
-                        validator: Validator.required(),
-                        keyboardType: TextInputType.number,
-                        borderRadius: 10,
-                        textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w400
-                        ),
-                        inputFormatters: <TextInputFormatter>[
-                          CurrencyTextInputFormatter(
-                            locale: 'id',
-                            decimalDigits: 0,
-                            symbol: 'Rp ',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    const SizedBox(width: 16),
-                    const LabelFormWidget2(
-                      label: "Harga Jual"
-                    ),
-                    SizedBox(
-                      width: 50.w - 16,
-                      height: 32,
-                      child: TextFieldWidget(
-                        name: 'sale_price',
-                        hintText: "",
-                        validator: Validator.required(),
-                        keyboardType: TextInputType.number,
-                        borderRadius: 10,
-                        textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w400
-                        ),
-                        inputFormatters: <TextInputFormatter>[
-                          CurrencyTextInputFormatter(
-                            locale: 'id',
-                            decimalDigits: 0,
-                            symbol: 'Rp ',
-                          ),
-                        ],
                       ),
                     ),
                   ],
@@ -212,13 +150,13 @@ class AddProductButton extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 50.w - 16,
-                      height: 32,
                       child: TextFieldWidget(
                         name: 'stock',
                         hintText: "",
                         validator: Validator.required(),
                         keyboardType: TextInputType.number,
                         borderRadius: 10,
+                        contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                         textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: AppColors.black,
                           fontWeight: FontWeight.w400
@@ -227,22 +165,102 @@ class AddProductButton extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 32),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(width: 16),
-                    const LabelFormWidget2(
-                      label: "Gambar"
+                    SizedBox(
+                      width: 10.w - 16,
+                      child: Text(
+                        "Varian Produk",
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
-                    ImagePickerWidget(
-                      image: controller.newImage,
-                      onTap: (){
-                        // controller.showSelectImageOptions(context);
-                      }
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const LabelFormWidget2(
+                              label: "Harga Beli"
+                            ),
+                            SizedBox(
+                              width: 40.w - 16,
+                              child: TextFieldWidget(
+                                name: 'purchase_price',
+                                hintText: "",
+                                validator: Validator.required(),
+                                keyboardType: TextInputType.number,
+                                borderRadius: 10,
+                                contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
+                                textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w400
+                                ),
+                                inputFormatters: <TextInputFormatter>[
+                                  CurrencyTextInputFormatter(
+                                    locale: 'id',
+                                    decimalDigits: 0,
+                                    symbol: 'Rp ',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            const LabelFormWidget2(
+                              label: "Harga Jual"
+                            ),
+                            SizedBox(
+                              width: 40.w - 16,
+                              child: TextFieldWidget(
+                                name: 'sale_price',
+                                hintText: "",
+                                validator: Validator.required(),
+                                keyboardType: TextInputType.number,
+                                borderRadius: 10,
+                                contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
+                                textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w400
+                                ),
+                                inputFormatters: <TextInputFormatter>[
+                                  CurrencyTextInputFormatter(
+                                    locale: 'id',
+                                    decimalDigits: 0,
+                                    symbol: 'Rp ',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            const SizedBox(width: 16),
+                            const LabelFormWidget2(
+                              label: "Gambar"
+                            ),
+                            ImagePickerWidget(
+                              image: controller.newImage,
+                              onTap: (){
+                                // controller.showSelectImageOptions(context);
+                              }
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
                 Container(
                   margin: const EdgeInsets.only(right: 16),
                   alignment: Alignment.centerRight,
@@ -261,16 +279,16 @@ class AddProductButton extends StatelessWidget {
                         controller.addProductFormKey.currentState != null &&
                         controller.addProductFormKey.currentState!.saveAndValidate()
                       ){
-                        controller.addNewProduct(
-                          productCode: controller.addProductFormKey.currentState!.fields['product_code']!.value, 
-                          productName: controller.addProductFormKey.currentState!.fields['product_name']!.value, 
-                          categoryID: controller.addProductFormKey.currentState!.fields['category_id']!.value, 
-                          brand: controller.addProductFormKey.currentState!.fields['brand']!.value, 
-                          purchasePrice: controller.addProductFormKey.currentState!.fields['purchase_price']!.value, 
-                          salePrice: controller.addProductFormKey.currentState!.fields['sale_price']!.value, 
-                          stock: controller.addProductFormKey.currentState!.fields['stock']!.value, 
-                          context: context
-                        );
+                        // controller.addNewProduct(
+                        //   productCode: controller.addProductFormKey.currentState!.fields['product_code']!.value, 
+                        //   productName: controller.addProductFormKey.currentState!.fields['product_name']!.value, 
+                        //   categoryID: controller.addProductFormKey.currentState!.fields['category_id']!.value, 
+                        //   brand: controller.addProductFormKey.currentState!.fields['brand']!.value, 
+                        //   purchasePrice: controller.addProductFormKey.currentState!.fields['purchase_price']!.value, 
+                        //   salePrice: controller.addProductFormKey.currentState!.fields['sale_price']!.value, 
+                        //   stock: controller.addProductFormKey.currentState!.fields['stock']!.value, 
+                        //   context: context
+                        // );
                       }
                     }
                   ),

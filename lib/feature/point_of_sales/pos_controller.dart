@@ -7,8 +7,8 @@ import 'package:tpt_frontend/data/remote/dio.dart';
 import 'package:tpt_frontend/data/remote/endpoint.dart';
 import 'package:tpt_frontend/feature/auth/auth_controller.dart';
 import 'package:tpt_frontend/model/cart_product.dart';
-import 'package:tpt_frontend/model/product.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:tpt_frontend/model/product_variant.dart';
 import 'package:tpt_frontend/model/user.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/helper/loading_helper.dart';
@@ -31,7 +31,7 @@ class PointOfSalesController extends GetxController {
   Rx<bool> loadNext = Rx(false);
   Rx<String> searchKeyword = Rx("");
 
-  List<Product> productDataList = [];
+  List<ProductVariant> productDataList = [];
 
   RxList<CartProduct> cartDataList = <CartProduct>[].obs;
   Rx<int> total = Rx(0);
@@ -40,7 +40,7 @@ class PointOfSalesController extends GetxController {
 
   @override
   void onInit() {
-    getAllProduct();
+    getAllProductVariant();
     super.onInit();
   }
 
@@ -50,7 +50,7 @@ class PointOfSalesController extends GetxController {
     total.value = 0;
     searchformKey.currentState?.reset();
     searchKeyword.value = "";
-    await getAllProduct();
+    await getAllProductVariant();
     update();
     refreshController.refreshCompleted();
   }
@@ -59,29 +59,29 @@ class PointOfSalesController extends GetxController {
     loadNext.value = true;
     hasNext.value = false;
     page.value = page.value + 1;
-    await getAllProduct(page: page.value);
+    await getAllProductVariant(page: page.value);
     refreshController.loadComplete();
   }
 
-  Future<void> getAllProduct({
+  Future<void> getAllProductVariant({
     String? keyword,
     int page = 1,
   }) async {
     isLoading = true;
     final dio = await AppDio().getDIO();
-    ProductResponse? productResponse;
+    ProductVariantResponse? productResponse;
 
     try {
       final productData = await dio.get(
-        "${BaseUrlLocal.product}?keyword=${keyword ?? ""}&pageSize=${pageSize.value}&page=$page",
+        "${BaseUrlLocal.productVariant}?keyword=${keyword ?? ""}&pageSize=${pageSize.value}&page=$page",
       );
       debugPrint('Products: ${productData.data}');
-      productResponse = ProductResponse.fromJson(productData.data);
+      productResponse = ProductVariantResponse.fromJson(productData.data);
       if(loadNext.value == true){
-        productDataList.addAll(productResponse.data!.product ?? []); 
+        productDataList.addAll(productResponse.data!.productVariant ?? []); 
         loadNext.value = false;
       } else{
-        productDataList = productResponse.data!.product ?? [];
+        productDataList = productResponse.data!.productVariant ?? [];
       }
       hasNext.value = productResponse.data!.meta!.page! < productResponse.data!.meta!.totalPage!;
     } on DioError catch (error) {
@@ -95,7 +95,6 @@ class PointOfSalesController extends GetxController {
     required int productId, 
     required String productCode, 
     required String productName,
-    required int eceranId, 
     required int salePrice, 
     required RxInt quantity,
     required int stock,
@@ -107,7 +106,6 @@ class PointOfSalesController extends GetxController {
         productId: productId,
         productCode: productCode,
         productName: productName,
-        eceranId: eceranId,
         quantity: quantity,
         salePrice: salePrice,
         subTotal: subTotal,

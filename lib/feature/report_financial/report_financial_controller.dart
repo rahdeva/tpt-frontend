@@ -99,10 +99,18 @@ class FinancialReportController extends GetxController {
     ),
     FinancialType(
       typeId: 2,
-      typeName: "Biaya Operasional"
+      typeName: "Penjualan"
     ),
     FinancialType(
       typeId: 3,
+      typeName: "Pembelian"
+    ),
+    FinancialType(
+      typeId: 4,
+      typeName: "Biaya Operasional"
+    ),
+    FinancialType(
+      typeId: 5,
       typeName: "Biaya Lain-lain"
     ),
   ];

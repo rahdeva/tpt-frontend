@@ -26,6 +26,7 @@ class BaseUrlLocal {
   static String deleteUser({int? userId}) => "$baseUrlLocal/users/$userId";
 
   // Product
+  static String productVariant = "$baseUrlLocal/product_variants";
   static String product = "$baseUrlLocal/products";
   static String productByID({int? productId}) => "$baseUrlLocal/products/$productId";
   static String deleteProduct({int? productId}) => "$baseUrlLocal/products/$productId";

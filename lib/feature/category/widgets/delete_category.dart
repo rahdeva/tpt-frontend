@@ -101,32 +101,32 @@ class DeleteCategoryButton extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(width: 16),
-                    const LabelFormWidget2(
-                      label: "Warna Kategori"
-                    ),
-                    SizedBox(
-                      width: 50.w - 16,
-                      child: TextFieldWidget(
-                        enabled: false,
-                        name: 'category_color',
-                        hintText: "",
-                        validator: Validator.required(),
-                        keyboardType: TextInputType.text,
-                        borderRadius: 10,
-                        contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
-                        textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.w400
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     const SizedBox(width: 16),
+                //     const LabelFormWidget2(
+                //       label: "Warna Kategori"
+                //     ),
+                //     SizedBox(
+                //       width: 50.w - 16,
+                //       child: TextFieldWidget(
+                //         enabled: false,
+                //         name: 'category_color',
+                //         hintText: "",
+                //         validator: Validator.required(),
+                //         keyboardType: TextInputType.text,
+                //         borderRadius: 10,
+                //         contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
+                //         textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                //           color: AppColors.black,
+                //           fontWeight: FontWeight.w400
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 24),
                 Container(
                   margin: const EdgeInsets.only(right: 0),
                   alignment: Alignment.centerRight,

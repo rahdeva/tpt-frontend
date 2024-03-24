@@ -1,7 +1,6 @@
 import 'package:tpt_frontend/feature/category/category_binding.dart';
 import 'package:tpt_frontend/feature/category/category_page.dart';
 import 'package:tpt_frontend/feature/dashboard/dashboard_binding.dart';
-import 'package:tpt_frontend/feature/dashboard/dashboard_page.dart';
 import 'package:tpt_frontend/feature/history/history_binding.dart';
 import 'package:tpt_frontend/feature/history/history_page.dart';
 import 'package:tpt_frontend/feature/home/home_binding.dart';
@@ -114,11 +113,11 @@ class PageRoutes {
       page: () => const FinancialReportPage(),
       binding: FinancialReportBinding()
     ),
-    GetPage(
-      name: PageName.DASHBOARD_TRANSACTION,
-      page: () => const TransactionDashboardPage(),
-      binding: TransactionDashboardBinding()
-    ),
+    // GetPage(
+    //   name: PageName.DASHBOARD_TRANSACTION,
+    //   page: () => const TransactionDashboardPage(),
+    //   binding: TransactionDashboardBinding()
+    // ),
     GetPage(
       name: PageName.POINTOFSALES,
       page: () => const PointOfSalesPage(),

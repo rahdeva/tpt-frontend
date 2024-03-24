@@ -31,10 +31,10 @@ class EditProductButton extends StatelessWidget {
       buttonText: "Edit", 
       withIcon: true,
       onPressed: () {
-        controller.getProductDetail(
-          productId : productId,
-          isEdit: true 
-        );
+        // controller.getProductDetail(
+        //   productId : productId,
+        //   isEdit: true 
+        // );
         PopUpWidget.defaultPopUp(
           context: context,
           width: 60.w,
@@ -262,17 +262,17 @@ class EditProductButton extends StatelessWidget {
                         controller.editProductFormKey.currentState != null &&
                         controller.editProductFormKey.currentState!.saveAndValidate()
                       ){
-                        controller.updateProduct(
-                          productId: productId,
-                          productCode: controller.editProductFormKey.currentState!.fields['product_code']!.value, 
-                          productName: controller.editProductFormKey.currentState!.fields['product_name']!.value, 
-                          categoryID: controller.editProductFormKey.currentState!.fields['category_id']!.value, 
-                          brand: controller.editProductFormKey.currentState!.fields['brand']!.value, 
-                          purchasePrice: controller.editProductFormKey.currentState!.fields['purchase_price']!.value, 
-                          salePrice: controller.editProductFormKey.currentState!.fields['sale_price']!.value, 
-                          stock: controller.editProductFormKey.currentState!.fields['stock']!.value, 
-                          context: context
-                        );
+                      //   controller.updateProduct(
+                      //     productId: productId,
+                      //     productCode: controller.editProductFormKey.currentState!.fields['product_code']!.value, 
+                      //     productName: controller.editProductFormKey.currentState!.fields['product_name']!.value, 
+                      //     categoryID: controller.editProductFormKey.currentState!.fields['category_id']!.value, 
+                      //     brand: controller.editProductFormKey.currentState!.fields['brand']!.value, 
+                      //     purchasePrice: controller.editProductFormKey.currentState!.fields['purchase_price']!.value, 
+                      //     salePrice: controller.editProductFormKey.currentState!.fields['sale_price']!.value, 
+                      //     stock: controller.editProductFormKey.currentState!.fields['stock']!.value, 
+                      //     context: context
+                      // );
                       }
                     }
                   ),

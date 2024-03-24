@@ -85,15 +85,15 @@ class SaleReportDataSource extends DataTableSource {
                 ),
                 const SizedBox(width: 12),
                 // Later
-                PrimaryButtonWidget(
-                  width: 5.w,
-                  customColors: AppColors.orange,
-                  margin: const EdgeInsets.all(0),
-                  buttonText: "Edit", 
-                  withIcon: true,
-                  onPressed: () {},
-                ),
-                const SizedBox(width: 12),
+                // PrimaryButtonWidget(
+                //   width: 5.w,
+                //   customColors: AppColors.orange,
+                //   margin: const EdgeInsets.all(0),
+                //   buttonText: "Edit", 
+                //   withIcon: true,
+                //   onPressed: () {},
+                // ),
+                // const SizedBox(width: 12),
                 // Later
                 PrimaryButtonWidget(
                   width: 5.w,

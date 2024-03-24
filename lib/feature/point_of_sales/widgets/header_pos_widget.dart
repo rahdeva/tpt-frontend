@@ -102,7 +102,7 @@ class HeaderPOSWidget extends StatelessWidget {
                         ),
                         onPressed: (){
                           controller.searchKeyword.value = controller.searchformKey.currentState!.fields['search']!.value;
-                          controller.getAllProduct(
+                          controller.getAllProductVariant(
                             keyword: controller.searchKeyword.value
                           );
                         }, 

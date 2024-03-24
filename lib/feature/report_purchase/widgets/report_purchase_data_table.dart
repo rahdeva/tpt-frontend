@@ -4,9 +4,6 @@ import 'package:tpt_frontend/feature/report_purchase/widgets/view_report_purchas
 import 'package:tpt_frontend/model/purchase.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tpt_frontend/resources/resources.dart';
-import 'package:tpt_frontend/utills/widget/button/primary_button.dart';
-import 'package:sizer/sizer.dart';
 
 class PurchaseReportDataSource extends DataTableSource {
   PurchaseReportDataSource({
@@ -88,15 +85,15 @@ class PurchaseReportDataSource extends DataTableSource {
                   purchase: item,
                   controller: controller
                 ),
-                const SizedBox(width: 12),
-                PrimaryButtonWidget(
-                  width: 5.w,
-                  customColors: AppColors.orange,
-                  margin: const EdgeInsets.all(0),
-                  buttonText: "Edit", 
-                  withIcon: true,
-                  onPressed: () {},
-                ),
+                // const SizedBox(width: 12),
+                // PrimaryButtonWidget(
+                //   width: 5.w,
+                //   customColors: AppColors.orange,
+                //   margin: const EdgeInsets.all(0),
+                //   buttonText: "Edit", 
+                //   withIcon: true,
+                //   onPressed: () {},
+                // ),
                 const SizedBox(width: 12),
                 DeletePurchaseButton(
                   purchaseId: item.purchaseId!,

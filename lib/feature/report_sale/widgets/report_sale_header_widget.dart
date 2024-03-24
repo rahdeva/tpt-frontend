@@ -1,5 +1,4 @@
 import 'package:tpt_frontend/feature/report_sale/report_sale_controller.dart';
-import 'package:tpt_frontend/feature/report_sale/widgets/add_report_sale.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/widget/button/icon_button.dart';
 import 'package:flutter/material.dart';
@@ -92,16 +91,16 @@ class SaleReportHeaderWidget extends StatelessWidget {
         //   width: 2,
         //   height: 32,
         // ),
-        const SizedBox(width: 16),
-        Container(
-          color: AppColors.white.withOpacity(0.2),
-          width: 2,
-          height: 32,
-        ),
-        const SizedBox(width: 16),
-        AddSaleButton(
-          controller: controller
-        ),
+        // const SizedBox(width: 16),
+        // Container(
+        //   color: AppColors.white.withOpacity(0.2),
+        //   width: 2,
+        //   height: 32,
+        // ),
+        // const SizedBox(width: 16),
+        // AddSaleButton(
+        //   controller: controller
+        // ),
         const SizedBox(width: 24),
       ],
     );

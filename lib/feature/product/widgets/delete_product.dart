@@ -36,10 +36,10 @@ class DeleteProductButton extends StatelessWidget {
         size: 16,
       ), 
       onPressed: () {
-        controller.getProductDetail(
-          productId : productId,
-          isEdit: false
-        );
+        // controller.getProductDetail(
+        //   productId : productId,
+        //   isEdit: false
+        // );
         PopUpWidget.defaultPopUp(
           context: context,
           width: 60.w,
@@ -280,10 +280,10 @@ class DeleteProductButton extends StatelessWidget {
                           popUpConfirmText: "Delete", 
                           popUpCancelText: "Cancel",  
                           confirmOnPress: (){
-                            controller.deleteProduct(
-                              productId: productId,
-                              context: context
-                            );
+                            // controller.deleteProduct(
+                            //   productId: productId,
+                            //   context: context
+                            // );
                           }, 
                         );
                       }

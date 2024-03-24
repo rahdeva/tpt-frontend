@@ -83,9 +83,11 @@ class Meta {
 class SaleDetail {
     int? saleDetailId;
     int? saleId;
-    int? productId;
-    String? productCode;
-    String? productName;
+    int? productVariantId;
+    String? variantName;
+    String? productVariantCode;
+    String? productVariantName;
+    int? productQuantity;
     int? salePrice;
     int? quantity;
     int? subtotal;
@@ -95,9 +97,11 @@ class SaleDetail {
     SaleDetail({
         this.saleDetailId,
         this.saleId,
-        this.productId,
-        this.productCode,
-        this.productName,
+        this.productVariantId,
+        this.variantName,
+        this.productVariantCode,
+        this.productVariantName,
+        this.productQuantity,
         this.salePrice,
         this.quantity,
         this.subtotal,
@@ -108,9 +112,11 @@ class SaleDetail {
     factory SaleDetail.fromJson(Map<String, dynamic> json) => SaleDetail(
         saleDetailId: json["sale_detail_id"],
         saleId: json["sale_id"],
-        productId: json["product_id"],
-        productCode: json["product_code"],
-        productName: json["product_name"],
+        productVariantId: json["product_variant_id"],
+        variantName: json["variant_name"],
+        productVariantCode: json["product_variant_code"],
+        productVariantName: json["product_variant_name"],
+        productQuantity: json["product_quantity"],
         salePrice: json["sale_price"],
         quantity: json["quantity"],
         subtotal: json["subtotal"],
@@ -121,9 +127,11 @@ class SaleDetail {
     Map<String, dynamic> toJson() => {
         "sale_detail_id": saleDetailId,
         "sale_id": saleId,
-        "product_id": productId,
-        "product_code": productCode,
-        "product_name": productName,
+        "product_variant_id": productVariantId,
+        "variant_name": variantName,
+        "product_variant_code": productVariantCode,
+        "product_variant_name": productVariantName,
+        "product_quantity": productQuantity,
         "sale_price": salePrice,
         "quantity": quantity,
         "subtotal": subtotal,

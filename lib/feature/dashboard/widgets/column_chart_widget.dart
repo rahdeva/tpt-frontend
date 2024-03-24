@@ -47,6 +47,10 @@ class ColumnChartWidget extends StatelessWidget {
                   // groupsSpace: 10,
                   barTouchData: BarTouchData(
                     enabled: true,
+                    touchTooltipData: BarTouchTooltipData(
+                      tooltipBgColor: AppColors.white,
+                      tooltipBorder: const BorderSide(color: AppColors.background1)
+                    )
                   ),
                   titlesData: FlTitlesData(
                     show: true,

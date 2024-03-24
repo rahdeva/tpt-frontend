@@ -52,28 +52,19 @@ class ProductTableWidget extends StatelessWidget {
                         context, labelText: "No"
                       ),
                       dataColumnWidget(
-                        context, labelText: "Kode Produk"
-                      ),
-                      dataColumnWidget(
                         context, labelText: "Kategori"
                       ),
                       dataColumnWidget(
                         context, labelText: "Nama Produk"
                       ),
                       dataColumnWidget(
-                        context, labelText: "Merk"
+                        context, labelText: "Unit"
                       ),
                       dataColumnWidget(
-                        context, labelText: "Harga Beli"
+                        context, labelText: "Brand"
                       ),
                       dataColumnWidget(
-                        context, labelText: "Harga Jual"
-                      ),
-                      dataColumnWidget(
-                        context, labelText: "Stok"
-                      ),
-                      dataColumnWidget(
-                        context, labelText: "Terjual"
+                        context, labelText: "Stock"
                       ),
                       dataColumnWidget(
                         context, labelText: "Aksi"

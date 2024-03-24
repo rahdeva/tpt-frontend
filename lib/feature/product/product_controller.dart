@@ -5,7 +5,6 @@ import 'package:tpt_frontend/model/product.dart';
 import 'package:tpt_frontend/model/product_detail.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/helper/loading_helper.dart';
-import 'package:tpt_frontend/utills/helper/string_formatter.dart';
 import 'package:tpt_frontend/utills/widget/pop_up/pop_up_widget.dart';
 import 'package:tpt_frontend/utills/widget/snackbar/snackbar_widget.dart';
 import 'package:dio/dio.dart';
@@ -14,7 +13,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:tpt_frontend/data/remote/dio.dart';
 import 'package:tpt_frontend/data/remote/endpoint.dart';
-import 'package:intl/intl.dart';
 
 class ProductController extends GetxController {
   final GlobalKey<FormBuilderState> searchformKey = GlobalKey<FormBuilderState>();
@@ -26,7 +24,7 @@ class ProductController extends GetxController {
   bool isLoading = false;
 
   List<Product> dataList = [];
-  late Product dataObject;
+  late ProductDetail dataObject;
 
   Rx<int> page = Rx(1);
   Rx<int> totalItems = Rx(0);
@@ -114,208 +112,188 @@ class ProductController extends GetxController {
     update();
   }
 
-  // [CREATE] Add New Product
-  void addNewProduct({
-    required String productCode, 
-    required String productName,
-    required String categoryID, 
-    required String brand,
-    required String purchasePrice, 
-    required String salePrice, 
-    required String stock, 
-    required BuildContext context,
-  }) async {
-    showLoading();
-    final dio = await AppDio().getBasicDIO();
+// [CREATE] Add New Product
+void addNewProduct({
+  required String productName,
+  required String categoryID,
+  required String unit,
+  required String stock,
+  required String brand,
+  required List<Map<String, dynamic>> productVariants,
+  required BuildContext context,
+}) async {
+  showLoading();
+  final dio = await AppDio().getBasicDIO();
 
-    try {
-      final productData = await dio.post(
-        BaseUrlLocal.product,
-        data: {
-          "product_code": productCode,
-          "product_name": productName,
-          "category_id": int.parse(categoryID),
-          "brand": brand,
-          "purchase_price": StringFormatter.formatCurrencyNumber(purchasePrice),
-          "sale_price": StringFormatter.formatCurrencyNumber(salePrice),
-          "stock": int.parse(stock),
-          "sold": 0,
-          "image": ""
-        },
-      );
-      debugPrint('Tambah Produk: ${productData.data}');
-      dismissLoading();
-      Get.back();
-      getAllProducts();
-      // ignore: use_build_context_synchronously
-      PopUpWidget.successAndFailPopUp(
-        context: context, 
-        titleString: "Success!", 
-        middleText: "Product berhasil ditambahkan.", 
-        buttonText: "OK"
-      );
-    } on DioError catch (error) {
-      dismissLoading();
-      SnackbarWidget.defaultSnackbar(
-        icon: const Icon(
-          Icons.cancel,
-          color: AppColors.red,
-        ),
-        title: "Error!",
-        subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
-      );
-      debugPrint(error.toString());
-    }
+  try {
+    final productData = await dio.post(
+      BaseUrlLocal.product,
+      data: {
+        "product_name": productName,
+        "category_id": int.parse(categoryID),
+        "unit": unit,
+        "stock": int.parse(stock),
+        "brand": brand,
+        "product_variant": productVariants,
+      },
+    );
+    debugPrint('Tambah Produk: ${productData.data}');
+    dismissLoading();
+    Get.back();
+    getAllProducts();
+    // ignore: use_build_context_synchronously     
+    PopUpWidget.successAndFailPopUp(
+      context: context,
+      titleString: "Success!",
+      middleText: "Product berhasil ditambahkan.",
+      buttonText: "OK"
+    );
+  } on DioError catch (error) {
+    dismissLoading();
+    SnackbarWidget.defaultSnackbar(
+      icon: const Icon(
+        Icons.cancel,
+        color: AppColors.red,
+      ),
+      title: "Error!",
+      subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
+    );
+    debugPrint(error.toString());
   }
+}
 
-  // [READ] Get Product Detail
-  Future<void> getProductDetail({
-    int? productId,
-    bool? isEdit
-  }) async {
-    final dio = await AppDio().getDIO();
-    ProductDetailResponse? productDetailResponse;
+// [READ] Get Product Detail
+Future<void> getProductDetail({
+  int? productId,
+  bool? isEdit
+}) async {
+  final dio = await AppDio().getDIO();
+  ProductDetailResponse? productDetailResponse;
 
-    try {
-      final productData = await dio.get(
-        BaseUrlLocal.productByID(productId: productId)
-      );
-      debugPrint('Product Detail : ${productData.data}');
-      productDetailResponse = ProductDetailResponse.fromJson(productData.data);
-      dataObject = productDetailResponse.data!.product!;
-      isEdit == true
-      ? editProductFormKey.currentState!.patchValue({
-          'product_code' : dataObject.productCode,
-          'product_name' : dataObject.productName,
-          'category_id' : dataObject.categoryId.toString(),
-          'brand' : dataObject.brand,
-          'purchase_price' : NumberFormat.currency(
-            locale: 'id',
-            decimalDigits: 0,
-            symbol: "Rp "
-          ).format(dataObject.purchasePrice),
-          'sale_price' : NumberFormat.currency(
-            locale: 'id',
-            decimalDigits: 0,
-            symbol: "Rp "
-          ).format(dataObject.purchasePrice),
-          'stock' : dataObject.stock.toString(),
-        })
-      : deleteProductFormKey.currentState!.patchValue({
-          'product_code' : dataObject.productCode,
-          'product_name' : dataObject.productName,
-          'category_id' : dataObject.categoryId.toString(),
-          'brand' : dataObject.brand,
-          'purchase_price' : NumberFormat.currency(
-            locale: 'id',
-            decimalDigits: 0,
-            symbol: "Rp "
-          ).format(dataObject.purchasePrice),
-          'sale_price' : NumberFormat.currency(
-            locale: 'id',
-            decimalDigits: 0,
-            symbol: "Rp "
-          ).format(dataObject.purchasePrice),
-          'stock' : dataObject.stock.toString(),
-        });
-      update();
-    } on DioError catch (error) {
-      debugPrint(error.toString());
-    }
+  try {
+    final productData = await dio.get(
+      BaseUrlLocal.productByID(productId: productId)
+    );
+    debugPrint('Product Detail : ${productData.data}');
+    productDetailResponse = ProductDetailResponse.fromJson(productData.data);
+    dataObject = productDetailResponse.data!.product!;
+    isEdit == true
+    ? editProductFormKey.currentState!.patchValue({
+        'product_name' : dataObject.productName,
+        'category_id' : dataObject.categoryId.toString(),
+        'unit' : dataObject.unit,
+        'stock' : dataObject.stock.toString(),
+        'brand' : dataObject.brand,
+        'product_variant' : dataObject.productVariant,
+      })
+    : deleteProductFormKey.currentState!.patchValue({
+        'product_name' : dataObject.productName,
+        'category_id' : dataObject.categoryId.toString(),
+        'unit' : dataObject.unit,
+        'stock' : dataObject.stock.toString(),
+        'brand' : dataObject.brand,
+        'product_variant' : dataObject.productVariant,
+      });
     update();
+  } on DioError catch (error) {
+    debugPrint(error.toString());
   }
+  update();
+}
 
-  // [UPDATE] Update Product
-  void updateProduct({
-    required int productId, 
-    required String productCode, 
-    required String productName,
-    required String categoryID, 
-    required String brand,
-    required String purchasePrice, 
-    required String salePrice, 
-    required String stock, 
-    required BuildContext context,
-  }) async {
-    showLoading();
-    final dio = await AppDio().getDIO();
 
-    try {
-      final productData = await dio.put(
-        BaseUrlLocal.product,
-        data: {
-          "product_id": productId,
-          "product_code": productCode,
-          "product_name": productName,
-          "category_id": int.parse(categoryID),
-          "brand": brand,
-          "purchase_price": StringFormatter.formatCurrencyNumber(purchasePrice),
-          "sale_price": StringFormatter.formatCurrencyNumber(salePrice),
-          "stock": int.parse(stock),
-          "image": ""
-        },
-      );
-      debugPrint('Edit Product: ${productData.data}');
-      dismissLoading();
-      Get.back();
-      // ignore: use_build_context_synchronously
-      PopUpWidget.successAndFailPopUp(
-        context: context, 
-        titleString: "Success!", 
-        middleText: "Produk berhasil diperbaharui.", 
-        buttonText: "OK"
-      );
-      await refreshPage();
-    } on DioError catch (error) {
-      dismissLoading();
-      SnackbarWidget.defaultSnackbar(
-        icon: const Icon(
-          Icons.cancel,
-          color: AppColors.red,
-        ),
-        title: "Error!",
-        subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
-      );
-      debugPrint(error.toString());
-    }
-  }
 
-  // [DELETE] Delete Product
-  void deleteProduct({
-    required int productId, 
-    required BuildContext context,
-  }) async {
-    showLoading();
-    final dio = await AppDio().getDIO();
+  // // [UPDATE] Update Product
+  // void updateProduct({
+  //   required int productId, 
+  //   required String productCode, 
+  //   required String productName,
+  //   required String categoryID, 
+  //   required String brand,
+  //   required String purchasePrice, 
+  //   required String salePrice, 
+  //   required String stock, 
+  //   required BuildContext context,
+  // }) async {
+  //   showLoading();
+  //   final dio = await AppDio().getDIO();
 
-    try {
-      final productData = await dio.delete(
-        BaseUrlLocal.deleteProduct(productId: productId)
-      );
-      debugPrint('Delete Product: ${productData.data}');
-      dismissLoading();
-      Get.back();
-      // ignore: use_build_context_synchronously
-      PopUpWidget.successAndFailPopUp(
-        context: context, 
-        titleString: "Success!", 
-        middleText: "Product berhasil dihapus.", 
-        buttonText: "OK"
-      );
-      await refreshPage();
-    } on DioError catch (error) {
-      dismissLoading();
-      SnackbarWidget.defaultSnackbar(
-        icon: const Icon(
-          Icons.cancel,
-          color: AppColors.red,
-        ),
-        title: "Error!",
-        subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
-      );
-      debugPrint(error.toString());
-    }
-  }
+  //   try {
+  //     final productData = await dio.put(
+  //       BaseUrlLocal.product,
+  //       data: {
+  //         "product_id": productId,
+  //         "product_code": productCode,
+  //         "product_name": productName,
+  //         "category_id": int.parse(categoryID),
+  //         "brand": brand,
+  //         "purchase_price": StringFormatter.formatCurrencyNumber(purchasePrice),
+  //         "sale_price": StringFormatter.formatCurrencyNumber(salePrice),
+  //         "stock": int.parse(stock),
+  //         "image": ""
+  //       },
+  //     );
+  //     debugPrint('Edit Product: ${productData.data}');
+  //     dismissLoading();
+  //     Get.back();
+  //     // ignore: use_build_context_synchronously
+  //     PopUpWidget.successAndFailPopUp(
+  //       context: context, 
+  //       titleString: "Success!", 
+  //       middleText: "Produk berhasil diperbaharui.", 
+  //       buttonText: "OK"
+  //     );
+  //     await refreshPage();
+  //   } on DioError catch (error) {
+  //     dismissLoading();
+  //     SnackbarWidget.defaultSnackbar(
+  //       icon: const Icon(
+  //         Icons.cancel,
+  //         color: AppColors.red,
+  //       ),
+  //       title: "Error!",
+  //       subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
+  //     );
+  //     debugPrint(error.toString());
+  //   }
+  // }
+
+  // // [DELETE] Delete Product
+  // void deleteProduct({
+  //   required int productId, 
+  //   required BuildContext context,
+  // }) async {
+  //   showLoading();
+  //   final dio = await AppDio().getDIO();
+
+  //   try {
+  //     final productData = await dio.delete(
+  //       BaseUrlLocal.deleteProduct(productId: productId)
+  //     );
+  //     debugPrint('Delete Product: ${productData.data}');
+  //     dismissLoading();
+  //     Get.back();
+  //     // ignore: use_build_context_synchronously
+  //     PopUpWidget.successAndFailPopUp(
+  //       context: context, 
+  //       titleString: "Success!", 
+  //       middleText: "Product berhasil dihapus.", 
+  //       buttonText: "OK"
+  //     );
+  //     await refreshPage();
+  //   } on DioError catch (error) {
+  //     dismissLoading();
+  //     SnackbarWidget.defaultSnackbar(
+  //       icon: const Icon(
+  //         Icons.cancel,
+  //         color: AppColors.red,
+  //       ),
+  //       title: "Error!",
+  //       subtitle: "${error.response!.statusCode.toString()} - ${error.response!.statusMessage.toString()}",
+  //     );
+  //     debugPrint(error.toString());
+  //   }
+  // }
 
   // Future pickImage(ImageSource source) async {
   //   try {

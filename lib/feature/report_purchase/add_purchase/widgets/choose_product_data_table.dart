@@ -1,11 +1,11 @@
+import 'package:intl/intl.dart';
 import 'package:tpt_frontend/feature/report_purchase/add_purchase/add_purchase_controller.dart';
-import 'package:tpt_frontend/model/product.dart';
+import 'package:tpt_frontend/model/product_variant.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/widget/button/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
 class ChooseProductDataSource extends DataTableSource {
@@ -15,7 +15,7 @@ class ChooseProductDataSource extends DataTableSource {
     required this.context,
   });
   
-  final List<Product> data;
+  final List<ProductVariant> data;
   final AddPurchaseReportController controller;
   final BuildContext context;
 
@@ -46,7 +46,7 @@ class ChooseProductDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            item.productCode ?? "-",
+            item.productVariantCode ?? "-",
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),
@@ -58,7 +58,7 @@ class ChooseProductDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            item.productName ?? "-",
+            item.productVariantName ?? "-",
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),
@@ -94,9 +94,9 @@ class ChooseProductDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            item.stock == null
+            item.variantStock == null
             ? "-"
-            : item.stock.toString(),
+            : item.variantStock.toString(),
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),
@@ -115,7 +115,7 @@ class ChooseProductDataSource extends DataTableSource {
                 size: 16,
               ),
               onPressed: () {
-                controller.addPurchasingData(item);
+                // controller.addPurchasingData(item);
                 Get.back();
               },
             ),

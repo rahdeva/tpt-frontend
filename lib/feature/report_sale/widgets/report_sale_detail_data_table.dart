@@ -41,13 +41,13 @@ class SaleReportDetailDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            item.productCode ?? "-",
+            item.productVariantCode ?? "-",
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),
         DataCell(
           Text(
-            item.productName ?? "-",
+            item.productVariantName ?? "-",
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),

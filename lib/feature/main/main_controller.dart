@@ -1,5 +1,5 @@
 import 'package:tpt_frontend/feature/category/category_page.dart';
-import 'package:tpt_frontend/feature/dashboard/dashboard_page.dart';
+import 'package:tpt_frontend/feature/dashboard/dashboard_transaction_page.dart';
 import 'package:tpt_frontend/feature/history/history_page.dart';
 import 'package:tpt_frontend/feature/home/home_page.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_page.dart';

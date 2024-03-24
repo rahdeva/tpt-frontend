@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tpt_frontend/feature/point_of_sales/pos_controller.dart';
-import 'package:tpt_frontend/model/product.dart';
+import 'package:tpt_frontend/model/product_variant.dart';
 import 'package:tpt_frontend/resources/resources.dart';
 import 'package:tpt_frontend/utills/helper/static_value_helper.dart';
 
 class POSProductListItem extends StatelessWidget {
   final int index;
   final PointOfSalesController controller;
-  final Product mData;
+  final ProductVariant mData;
 
   const POSProductListItem({
     Key? key, 
@@ -23,16 +23,15 @@ class POSProductListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        if(mData.stock != 0){
+        if(mData.variantStock != 0){
           controller.addProductToCart(
             productId: mData.productId!,
-            productCode: mData.productCode!,
-            eceranId: mData.eceranId!,
+            productCode: mData.productVariantCode!,
             salePrice: mData.salePrice!, 
             quantity: 1.obs,
-            productName: mData.productName!, 
+            productName: mData.productVariantName!, 
             image: mData.image!, 
-            stock: mData.stock!,
+            stock: mData.variantStock!,
             subTotal: mData.salePrice!.obs,
           );
         }
@@ -60,7 +59,7 @@ class POSProductListItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                mData.stock == 0
+                mData.variantStock == 0
                 ? Container(
                     height: 168,
                     width: 100.w,
@@ -73,7 +72,7 @@ class POSProductListItem extends StatelessWidget {
                     ),
                   )
                 : const SizedBox(),
-                mData.stock == 0
+                mData.variantStock == 0
                 ? Center(
                   child: Container(
                       margin: const EdgeInsets.only(top: 72),
@@ -111,7 +110,7 @@ class POSProductListItem extends StatelessWidget {
                           vertical: 4
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.background2,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(4)
                         ),
                         child: Text(
@@ -135,7 +134,7 @@ class POSProductListItem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4)
                         ),
                         child: Text(
-                          mData.stock.toString(),
+                          mData.variantStock.toString(),
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 10,
                             color: AppColors.white,
@@ -161,9 +160,7 @@ class POSProductListItem extends StatelessWidget {
                         vertical: 4
                       ),
                       decoration: BoxDecoration(
-                        color: mData.categoryColor == null
-                        ? AppColors.background2
-                        : Color(int.parse(mData.categoryColor!)),
+                        color: AppColors.background2,
                         borderRadius: BorderRadius.circular(4)
                       ),
                       child: Text(
@@ -193,7 +190,7 @@ class POSProductListItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    mData.productName ?? "-",
+                    mData.productVariantName ?? "-",
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.clip,

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:tpt_frontend/data/remote/dio.dart';
 import 'package:tpt_frontend/data/remote/endpoint.dart';
 import 'package:tpt_frontend/feature/auth/auth_controller.dart';
-import 'package:tpt_frontend/model/product.dart';
+import 'package:tpt_frontend/model/product_variant.dart';
 import 'package:tpt_frontend/model/purchase.dart';
 import 'package:tpt_frontend/model/supplier.dart';
 import 'package:tpt_frontend/model/user.dart';
@@ -35,7 +35,7 @@ class AddPurchaseReportController extends GetxController {
   Purchase? purchaseDetail;
   Supplier? supplierChoosen;
 
-  List<Product> productDataList = [];
+  List<ProductVariant> productDataList = [];
 
   Rx<int> productPage = Rx(1);
   Rx<int> productTotalItems = Rx(0);
@@ -95,19 +95,19 @@ class AddPurchaseReportController extends GetxController {
   }) async {
     isLoading = true;
     final dio = await AppDio().getDIO();
-    ProductResponse? productResponse;
+    ProductVariantResponse? productResponse;
 
     try {
       final productData = await dio.get(
-        "${BaseUrlLocal.product}?keyword=${keyword ?? ""}&pageSize=${productPageSize.value}&page=$productPage",
+        "${BaseUrlLocal.productVariant}?keyword=${keyword ?? ""}&pageSize=${productPageSize.value}&page=$productPage",
       );
       debugPrint('Suppliers: ${productData.data}');
-      productResponse = ProductResponse.fromJson(productData.data);
+      productResponse = ProductVariantResponse.fromJson(productData.data);
       if(productLoadNext.value == true){
-        productDataList.addAll(productResponse.data!.product ?? []); 
+        productDataList.addAll(productResponse.data!.productVariant ?? []); 
         productLoadNext.value = false;
       } else{
-        productDataList = productResponse.data!.product ?? [];
+        productDataList = productResponse.data!.productVariant ?? [];
       }
       productTotalItems.value = productResponse.data!.meta!.totalItems!;
     } on DioError catch (error) {
@@ -119,7 +119,7 @@ class AddPurchaseReportController extends GetxController {
   }
 
   void addPurchasingData(
-    Product choosenProduct
+    ProductVariant choosenProduct
   ) {
     purchasingIndex.value = purchasingDataList.length;
     int idx = purchasingIndex.value;
@@ -144,7 +144,7 @@ class AddPurchaseReportController extends GetxController {
           ),
           DataCell(
             Text(
-              choosenProduct.productCode ?? "-",
+              choosenProduct.productVariantCode ?? "-",
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -164,7 +164,7 @@ class AddPurchaseReportController extends GetxController {
           ),
           DataCell(
             Text(
-              choosenProduct.productName ?? "-",
+              choosenProduct.productVariantName ?? "-",
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,

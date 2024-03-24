@@ -3,7 +3,6 @@ import 'package:tpt_frontend/feature/product/widgets/delete_product.dart';
 import 'package:tpt_frontend/feature/product/widgets/edit_product.dart';
 import 'package:tpt_frontend/model/product.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ProductDataSource extends DataTableSource {
   ProductDataSource({
@@ -43,12 +42,6 @@ class ProductDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            item.productCode ?? "-",
-            style: Theme.of(context).textTheme.bodyMedium
-          )
-        ),
-        DataCell(
-          Text(
             item.categoryName ?? "-",
             style: Theme.of(context).textTheme.bodyMedium
           )
@@ -61,34 +54,40 @@ class ProductDataSource extends DataTableSource {
         ),
         DataCell(
           Text(
-            item.brand == null || item.brand == ""
+            item.unit ?? "-",
+            style: Theme.of(context).textTheme.bodyMedium
+          )
+        ),
+        DataCell(
+          Text(
+            item.brand == null || item.brand == "" || item.brand == "-"
             ? "-"
             : item.brand!,
             style: Theme.of(context).textTheme.bodyMedium
           )
         ),
-        DataCell(
-          Text(
-            NumberFormat.currency(
-              locale: 'id', 
-              decimalDigits: 0,
-              symbol: "Rp "
-            ).format(item.purchasePrice),
-            maxLines: 1,
-            style: Theme.of(context).textTheme.bodyMedium
-          )
-        ),
-        DataCell(
-          Text(
-            NumberFormat.currency(
-              locale: 'id', 
-              decimalDigits: 0,
-              symbol: "Rp "
-            ).format(item.salePrice),
-            maxLines: 1,
-            style: Theme.of(context).textTheme.bodyMedium
-          )
-        ),
+        // DataCell(
+        //   Text(
+        //     NumberFormat.currency(
+        //       locale: 'id', 
+        //       decimalDigits: 0,
+        //       symbol: "Rp "
+        //     ).format(item.purchasePrice),
+        //     maxLines: 1,
+        //     style: Theme.of(context).textTheme.bodyMedium
+        //   )
+        // ),
+        // DataCell(
+        //   Text(
+        //     NumberFormat.currency(
+        //       locale: 'id', 
+        //       decimalDigits: 0,
+        //       symbol: "Rp "
+        //     ).format(item.salePrice),
+        //     maxLines: 1,
+        //     style: Theme.of(context).textTheme.bodyMedium
+        //   )
+        // ),
         DataCell(
           Text(
             item.stock == null

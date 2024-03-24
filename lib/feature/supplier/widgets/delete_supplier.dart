@@ -115,6 +115,7 @@ class DeleteSupplierButton extends StatelessWidget {
                     SizedBox(
                       width: 50.w - 16,
                       child: TextAreaWidget(
+                        enabled: false,
                         name: "address", 
                         hintText: "", 
                         textAreaResultC: controller.deleteAddressResult, 
