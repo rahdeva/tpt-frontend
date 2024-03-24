@@ -35,6 +35,8 @@ class ProductController extends GetxController {
   File? newImage;
   String? imageUploadfilename;
 
+  Rx<bool> stockSort = Rx(false);
+
   @override
   void onInit() {
     getAllProducts();
@@ -86,6 +88,7 @@ class ProductController extends GetxController {
   // [READ] Get All Products
   Future<void> getAllProducts({
     String? keyword,
+    String? sort,
     int page = 1,
   }) async {
     isLoading = true;
@@ -94,7 +97,7 @@ class ProductController extends GetxController {
 
     try {
       final productData = await dio.get(
-        "${BaseUrlLocal.product}?keyword=${keyword ?? ""}&pageSize=${pageSize.value}&page=$page",
+        "${BaseUrlLocal.product}?keyword=${keyword ?? ""}&pageSize=${pageSize.value}&page=$page&sort=${sort ?? ""}",
       );
       debugPrint('Products: ${productData.data}');
       productResponse = ProductResponse.fromJson(productData.data);

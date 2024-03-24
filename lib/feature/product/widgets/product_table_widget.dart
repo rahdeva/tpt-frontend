@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:tpt_frontend/feature/product/product_controller.dart';
 import 'package:tpt_frontend/feature/product/widgets/product_data_table.dart';
 import 'package:tpt_frontend/resources/resources.dart';
@@ -63,8 +64,34 @@ class ProductTableWidget extends StatelessWidget {
                       dataColumnWidget(
                         context, labelText: "Brand"
                       ),
-                      dataColumnWidget(
-                        context, labelText: "Stock"
+                      DataColumn(
+                        label: InkWell(
+                          onTap: (){
+                            controller.stockSort.value == false
+                            ? controller.getAllProducts(
+                                sort: "asc"
+                              )
+                            : controller.getAllProducts();
+                            controller.stockSort.toggle();
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Stock",
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  color: AppColors.white, 
+                                  fontWeight: FontWeight.w700
+                                ),
+                              ),
+                              controller.stockSort.value == false
+                              ? const SizedBox()
+                              : const Icon(
+                                  Icons.arrow_upward_rounded,
+                                  color: AppColors.white,
+                                )
+                            ],
+                          ),
+                        ),
                       ),
                       dataColumnWidget(
                         context, labelText: "Aksi"
