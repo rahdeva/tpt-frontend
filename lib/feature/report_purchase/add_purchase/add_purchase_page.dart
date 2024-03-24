@@ -299,10 +299,10 @@ class AddPurchaseReportPage extends StatelessWidget {
                                     controller.addPurchaseFormKey.currentState!.saveAndValidate() &&
                                     controller.purchasingDataList.isNotEmpty
                                   ){
-                                    // controller.addNewPurchase(
-                                    //   purchaseDate: controller.addPurchaseFormKey.currentState!.fields['purchase_date']!.value,
-                                    //   context: context
-                                    // );
+                                    controller.addNewPurchase(
+                                      purchaseDate: controller.addPurchaseFormKey.currentState!.fields['purchase_date']!.value,
+                                      context: context
+                                    );
                                   }
                                 }
                               ),

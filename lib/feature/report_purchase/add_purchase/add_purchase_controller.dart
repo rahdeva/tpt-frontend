@@ -311,30 +311,30 @@ class AddPurchaseReportController extends GetxController {
             //     );
             //   }
             // )
-            Text(
-              "0",
-              maxLines: 1,
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black,
-              ),
-            )
-            // Obx(
-            //   () => Text(
-            //     NumberFormat.currency(
-            //       locale: 'id', 
-            //       decimalDigits: 0,
-            //       symbol: "Rp "
-            //     ).format(subTotalDataList[idx]),
-            //     maxLines: 1,
-            //     style: const TextStyle(
-            //       fontSize: 12,
-            //       fontWeight: FontWeight.w500,
-            //       color: AppColors.black,
-            //     ),
-            //   )
+            // Text(
+            //   "0",
+            //   maxLines: 1,
+            //   style: const TextStyle(
+            //     fontSize: 12,
+            //     fontWeight: FontWeight.w500,
+            //     color: AppColors.black,
+            //   ),
             // )
+            Obx(
+              () => Text(
+                NumberFormat.currency(
+                  locale: 'id', 
+                  decimalDigits: 0,
+                  symbol: "Rp "
+                ).format(subTotalDataList[idx]),
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              )
+            )
           ),
           DataCell(
             Container(
@@ -381,11 +381,11 @@ class AddPurchaseReportController extends GetxController {
     update();
   }
 
-  // void updateSubTotal(){
-  //   for (int i = 0; i < subTotalDataList.length; i++) {
-  //     update(["total-$i"]);
-  //   }
-  // }
+  void updateSubTotal(){
+    for (int i = 0; i < subTotalDataList.length; i++) {
+      update(["total-$i"]);
+    }
+  }
 
   void deletePurchasingItem(int index){
     purchaseProductIdDataList.removeAt(index);
@@ -421,9 +421,7 @@ class AddPurchaseReportController extends GetxController {
     purchasesDetail.clear();
     for (int i = 0; i < purchaseProductIdDataList.length; i++) {
       Map<String, dynamic> purchaseDetail = {
-        "product_id": purchaseProductIdDataList[i],
-        // [FIX] Dummy
-        "eceran_id": 17,
+        "product_variant_id": purchaseProductIdDataList[i],
         "purchase_price": purchasePriceDataList[i],
         "quantity": totalItemDataList[i],
         "subtotal": subTotalDataList[i]
@@ -449,8 +447,8 @@ class AddPurchaseReportController extends GetxController {
         BaseUrlLocal.purchase,
         data: {
           "user_id" : user?.userId,
-          "purchase_date": purchaseDateValue,
           "supplier_id": supplierChoosen?.supplierId,
+          "purchase_date": purchaseDateValue,
           "total_item": purchasingDataList.length,
           "total_price": total.value,
           "purchases_detail": purchasesDetail,

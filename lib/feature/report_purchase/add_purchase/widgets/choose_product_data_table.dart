@@ -115,7 +115,7 @@ class ChooseProductDataSource extends DataTableSource {
                 size: 16,
               ),
               onPressed: () {
-                // controller.addPurchasingData(item);
+                controller.addPurchasingData(item);
                 Get.back();
               },
             ),
