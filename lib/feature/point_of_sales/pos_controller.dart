@@ -27,7 +27,7 @@ class PointOfSalesController extends GetxController {
 
   Rx<int> page = Rx(1);
   Rx<bool> hasNext = Rx(false);
-  Rx<int> pageSize = Rx(12);
+  Rx<int> pageSize = Rx(80);
   Rx<bool> loadNext = Rx(false);
   Rx<String> searchKeyword = Rx("");
 
@@ -46,8 +46,8 @@ class PointOfSalesController extends GetxController {
 
   void refreshPage() async {
     productDataList = [];
-    cartDataList.clear();
-    total.value = 0;
+    // cartDataList.clear();
+    // total.value = 0;
     searchformKey.currentState?.reset();
     searchKeyword.value = "";
     await getAllProductVariant();
@@ -92,25 +92,39 @@ class PointOfSalesController extends GetxController {
   }
 
   void addProductToCart({
-    required int productId, 
-    required String productCode, 
-    required String productName,
-    required int salePrice, 
+    required int productVariantId,
+    required int productId,
+    required int categoryId,
+    required String categoryName,
+    required String variantName,
+    required String productVariantCode,
+    required String productVariantName,
+    required int productQuantity,
+    required int purchasePrice,
+    required int salePrice,
+    required String image,
+    required String brand,
+    required int variantStock,
     required RxInt quantity,
-    required int stock,
     required RxInt subTotal,
-    required String image
   }){
     cartDataList.add(
       CartProduct(
+        productVariantId: productVariantId,
         productId: productId,
-        productCode: productCode,
-        productName: productName,
-        quantity: quantity,
+        categoryId: categoryId,
+        categoryName: categoryName,
+        variantName: variantName,
+        productVariantCode: productVariantCode,
+        productVariantName: productVariantName,
+        productQuantity: productQuantity,
+        purchasePrice: purchasePrice,
         salePrice: salePrice,
-        subTotal: subTotal,
-        stock: stock,
         image: image,
+        brand: brand,
+        variantStock: variantStock,
+        quantity: quantity,
+        subTotal: subTotal
       )
     );
     update();
@@ -125,15 +139,20 @@ class PointOfSalesController extends GetxController {
 
   void deleteAllCartData() {
     cartDataList.clear();
+    total.value = 0;
     update();
     updateTotal();
   }
 
-  void addQuantity(mData){
-    mData.quantity.value = mData.quantity.value + 1;
-    mData.subTotal!.value = mData.quantity!.value * mData.salePrice!;
-    update();
-    updateTotal();
+  void addQuantity(CartProduct mData){
+    print(mData.quantity!.value);
+    print(mData.variantStock);
+    if(mData.quantity!.value < mData.variantStock!){
+      mData.quantity!.value = mData.quantity!.value + 1;
+      mData.subTotal!.value = mData.quantity!.value * mData.salePrice!;
+      update();
+      updateTotal();
+    }
   }
 
   void substractQuantity(CartProduct mData){
@@ -152,17 +171,17 @@ class PointOfSalesController extends GetxController {
     }
     debugPrint("total.value");
     debugPrint(total.value.toString());
-    for (var cartProduct in cartDataList) {
-      debugPrint('Product ID: ${cartProduct.productId}');
-      debugPrint('Product Name: ${cartProduct.productName}');
-      debugPrint('Eceran ID: ${cartProduct.eceranId}');
-      debugPrint('Quantity: ${cartProduct.quantity}');
-      debugPrint('Sale Price: ${cartProduct.salePrice}');
-      debugPrint('Subtotal: ${cartProduct.subTotal}');
-      debugPrint('Stock: ${cartProduct.stock}');
-      debugPrint('Image: ${cartProduct.image}');
-      debugPrint('\n'); // Add a new line for readability
-    }
+    // for (var cartProduct in cartDataList) {
+    //   debugPrint('Product ID: ${cartProduct.productId}');
+    //   debugPrint('Product Name: ${cartProduct.productName}');
+    //   debugPrint('Eceran ID: ${cartProduct.eceranId}');
+    //   debugPrint('Quantity: ${cartProduct.quantity}');
+    //   debugPrint('Sale Price: ${cartProduct.salePrice}');
+    //   debugPrint('Subtotal: ${cartProduct.subTotal}');
+    //   debugPrint('Stock: ${cartProduct.stock}');
+    //   debugPrint('Image: ${cartProduct.image}');
+    //   debugPrint('\n'); // Add a new line for readability
+    // }
     update();
   }
 
@@ -185,7 +204,7 @@ class PointOfSalesController extends GetxController {
             ),
             DataCell(
               Text(
-                item.productCode ?? "-",
+                item.productVariantCode ?? "-",
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -195,7 +214,7 @@ class PointOfSalesController extends GetxController {
             ),
             DataCell(
               Text(
-                item.productName ?? "-",
+                item.productVariantName ?? "-",
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -263,8 +282,7 @@ class PointOfSalesController extends GetxController {
     salesDetail.clear();
     for (int i = 0; i < cartDataList.length; i++) {
       Map<String, dynamic> saleDetail = {
-        "product_id": cartDataList[i].productId,
-        "eceran_id": cartDataList[i].eceranId,
+        "product_variant_id": cartDataList[i].productVariantId,
         "sale_price": cartDataList[i].salePrice,
         "quantity": cartDataList[i].quantity!.value,
         "subtotal":  cartDataList[i].subTotal!.value,

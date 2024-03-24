@@ -46,7 +46,7 @@ class CartListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  mData.productName ?? "",
+                  mData.productVariantName ?? "",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(

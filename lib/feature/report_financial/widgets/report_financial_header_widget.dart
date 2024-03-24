@@ -117,7 +117,7 @@ class FinancialReportHeaderWidget extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         AddFinancialButton(
-          controller: controller
+          controller: controller,
         ),
         const SizedBox(width: 24),
       ],

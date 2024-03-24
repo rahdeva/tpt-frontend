@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:tpt_frontend/feature/report_financial/report_financial_controller.dart';
 import 'package:tpt_frontend/model/financial_type.dart';
 import 'package:tpt_frontend/resources/resources.dart';
@@ -181,6 +182,8 @@ class AddFinancialButton extends StatelessWidget {
                       child: TextFieldWidget(
                         name: 'cash_in',
                         hintText: "",
+                        initialValue: "Rp 0",
+                        onChanged: (p0) => controller.changeBalanceFromCashIn(p0),
                         validator: Validator.required(),
                         keyboardType: TextInputType.number,
                         borderRadius: 10,
@@ -213,6 +216,8 @@ class AddFinancialButton extends StatelessWidget {
                       child: TextFieldWidget(
                         name: 'cash_out',
                         hintText: "",
+                        initialValue: "Rp 0",
+                        onChanged: (p0) => controller.changeBalanceFromCashOut(p0),
                         validator: Validator.required(),
                         keyboardType: TextInputType.number,
                         borderRadius: 10,
@@ -243,6 +248,12 @@ class AddFinancialButton extends StatelessWidget {
                     SizedBox(
                       width: 50.w - 16,
                       child: TextFieldWidget(
+                        enabled: false,
+                        initialValue: NumberFormat.currency(
+                          locale: 'id',
+                          decimalDigits: 0,
+                          symbol: "Rp "
+                        ).format(controller.balancesAdd),
                         name: 'balance',
                         hintText: "",
                         validator: Validator.required(),

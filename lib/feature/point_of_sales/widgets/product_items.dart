@@ -23,15 +23,23 @@ class POSProductListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
+        print(mData);
         if(mData.variantStock != 0){
           controller.addProductToCart(
+            productVariantId: mData.productId!,
             productId: mData.productId!,
-            productCode: mData.productVariantCode!,
-            salePrice: mData.salePrice!, 
-            quantity: 1.obs,
-            productName: mData.productVariantName!, 
+            variantName: mData.variantName!,
+            brand: mData.brand!,
+            categoryId: mData.categoryId!,
+            categoryName: mData.categoryName!,
+            productQuantity: mData.productQuantity!,
+            productVariantCode: mData.productVariantCode!,
+            productVariantName: mData.productVariantName!,
+            salePrice: mData.salePrice!,
+            purchasePrice: mData.productId!,
+            variantStock: mData.variantStock!,
             image: mData.image!, 
-            stock: mData.variantStock!,
+            quantity: 1.obs,
             subTotal: mData.salePrice!.obs,
           );
         }

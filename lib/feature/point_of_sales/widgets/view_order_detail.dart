@@ -104,7 +104,6 @@ class ViewOrderDetailButton extends StatelessWidget {
                               ),
                               SizedBox(
                                 width: 20.w - 16,
-                                height: 32,
                                 child: TextFieldWidget(
                                   enabled: false,
                                   name: 'total',
@@ -114,6 +113,7 @@ class ViewOrderDetailButton extends StatelessWidget {
                                     decimalDigits: 0,
                                     symbol: "Rp "
                                   ).format(controller.total.value),
+                                  contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                                   validator: Validator.required(),
                                   keyboardType: TextInputType.number,
                                   borderRadius: 10,
@@ -141,10 +141,10 @@ class ViewOrderDetailButton extends StatelessWidget {
                               ),
                               SizedBox(
                                 width: 20.w - 16,
-                                height: 32,
                                 child: TextFieldWidget(
                                   name: 'money_received',
                                   hintText: "",
+                                  contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                                   validator: Validator.required(),
                                   keyboardType: TextInputType.number,
                                   borderRadius: 10,
@@ -185,7 +185,6 @@ class ViewOrderDetailButton extends StatelessWidget {
                               ),
                               SizedBox(
                                 width: 20.w - 16,
-                                height: 32,
                                 child: TextFieldWidget(
                                   enabled: false,
                                   name: 'money_change',
@@ -193,6 +192,7 @@ class ViewOrderDetailButton extends StatelessWidget {
                                   validator: Validator.required(),
                                   keyboardType: TextInputType.number,
                                   borderRadius: 10,
+                                  contentPadding: const EdgeInsets.fromLTRB(12,12,12,12),
                                   textStyle: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,

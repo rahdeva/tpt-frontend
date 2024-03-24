@@ -43,7 +43,7 @@ class OrderTableWidget extends StatelessWidget {
               context, labelText: "Kode Produk"
             ),
             dataColumnWidget(
-              context, labelText: "Nama Produk"
+              context, labelText: "Nama Varian Produk"
             ),
             dataColumnWidget(
               context, labelText: "Harga"

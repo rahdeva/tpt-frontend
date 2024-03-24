@@ -43,6 +43,7 @@ class FinancialReportController extends GetxController {
   FinancialType? deletefinancialTypeResult;
 
   int balances = 0;
+  int balancesAdd = 0;
 
   @override
   void onInit() {
@@ -139,6 +140,7 @@ class FinancialReportController extends GetxController {
       debugPrint('Financials: ${balanceData.data}');
       financialResponse = BalanceResponse.fromJson(balanceData.data);
       balances = financialResponse.data?.balance ?? 0;
+      balancesAdd = financialResponse.data?.balance ?? 0;
     } on DioError catch (error) {
       debugPrint(error.toString());
     }
@@ -195,7 +197,7 @@ class FinancialReportController extends GetxController {
         BaseUrlLocal.financial,
         data: {
           "user_id" : user?.userId,
-          "type" : type,
+          "financial_type_id" : type,
           "information" : information,
           "financial_date": financialDateValue,
           "cash_in" : StringFormatter.formatCurrencyNumber(cashIn),
@@ -389,5 +391,39 @@ class FinancialReportController extends GetxController {
       );
       debugPrint(error.toString());
     }
+  }
+
+  void changeBalanceFromCashIn(String? p0){
+    int cashIn = 0;
+    if(p0 != ""){
+      cashIn = StringFormatter.formatCurrencyNumber(p0!);
+    }
+    int nowBalance = balancesAdd;
+    nowBalance = nowBalance + cashIn;
+    addFinancialReportFormKey.currentState!.patchValue({
+      "balance" : NumberFormat.currency(
+        locale: 'id',
+        decimalDigits: 0,
+        symbol: "Rp "
+      ).format(nowBalance),
+    });
+    update();
+  }
+
+  void changeBalanceFromCashOut(String? p0){
+    int cashIn = 0;
+    if(p0 != ""){
+      cashIn = StringFormatter.formatCurrencyNumber(p0!);
+    }
+    int nowBalance = balancesAdd;
+    nowBalance = nowBalance - cashIn;
+    addFinancialReportFormKey.currentState!.patchValue({
+      "balance" : NumberFormat.currency(
+        locale: 'id',
+        decimalDigits: 0,
+        symbol: "Rp "
+      ).format(nowBalance),
+    });
+    update();
   }
 }
